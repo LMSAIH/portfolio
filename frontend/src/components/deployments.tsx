@@ -14,33 +14,33 @@ export type Deployment = {
 }
 
 const StatusBadge = ({ status }: { status: Deployment["status"] }) => {
-  const statusConfig = {
-    online: { 
-      label: "Online", 
-      className: "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 border-green-200 dark:border-green-800" 
-    },
-    offline: { 
-      label: "Offline", 
-      className: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400 border-red-200 dark:border-red-800" 
-    },
-    unknown: { 
-      label: "Unknown", 
-      className: "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400 border-gray-200 dark:border-gray-800" 
-    },
-    checking: { 
-      label: "Checking...", 
-      className: "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 border-blue-200 dark:border-blue-800" 
-    },
-  }
+    const statusConfig = {
+        online: {
+            label: "Online",
+            className: "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 border-green-200 dark:border-green-800"
+        },
+        offline: {
+            label: "Offline",
+            className: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400 border-red-200 dark:border-red-800"
+        },
+        unknown: {
+            label: "Unknown",
+            className: "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400 border-gray-200 dark:border-gray-800"
+        },
+        checking: {
+            label: "Checking...",
+            className: "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400 border-blue-200 dark:border-blue-800"
+        },
+    }
 
-  const config = statusConfig[status]
-  
-  return (
-    <Badge variant="outline" className={config.className}>
-      {status === "checking" && <RefreshCw className="mr-1 h-3 w-3 animate-spin" />}
-      {config.label}
-    </Badge>
-  )
+    const config = statusConfig[status]
+
+    return (
+        <Badge variant="outline" className={config.className}>
+            {status === "checking" && <RefreshCw className="mr-1 h-3 w-3 animate-spin" />}
+            {config.label}
+        </Badge>
+    )
 }
 
 export const columns: ColumnDef<Deployment>[] = [
@@ -66,17 +66,15 @@ export const columns: ColumnDef<Deployment>[] = [
         cell: ({ row }) => {
             const url = row.getValue("url") as string
             return (
-                <Button variant="ghost" size="sm" asChild>
-                    <a
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
-                    >
-                        Visit
-                        <ExternalLink className="h-4 w-4" />
-                    </a>
-                </Button>
+                <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                >
+                    Visit
+                    <ExternalLink className="h-4 w-4" />
+                </a>
             )
         },
     },
@@ -124,15 +122,15 @@ const checkUrlStatus = async (url: string): Promise<"online" | "offline"> => {
         // Use a CORS proxy or direct fetch with no-cors mode
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
-        
+
         const response = await fetch(url, {
             method: 'HEAD',
             mode: 'no-cors',
             signal: controller.signal,
         });
-        
+
         clearTimeout(timeoutId);
-        
+
         // In no-cors mode, we can't read the status, but if fetch succeeds, the site is likely online
         return "online";
     } catch (error) {
