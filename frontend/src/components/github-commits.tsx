@@ -1,14 +1,9 @@
 
 import { useEffect, useState } from "react"
 import { ExternalLink, GitCommit, Calendar, User } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -52,33 +47,16 @@ export type GitHubEvent = {
   created_at: string
 }
 
-const CommitSkeleton = () => (
-  <Card className="mb-4">
-    <CardHeader className="pb-3">
-      <div className="flex items-start justify-between">
-        <div className="space-y-2 flex-1">
-          <Skeleton className="h-4 w-3/4" />
-          <div className="flex items-center gap-2">
-            <Skeleton className="h-3 w-20" />
-            <Skeleton className="h-3 w-24" />
-          </div>
-        </div>
-        <Skeleton className="h-8 w-16" />
-      </div>
-    </CardHeader>
-  </Card>
-)
-
 const formatDate = (dateString: string) => {
   const date = new Date(dateString)
   const now = new Date()
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
-  
+
   if (diffInSeconds < 60) return `${diffInSeconds}s ago`
   if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`
   if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`
   if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)}d ago`
-  
+
   return date.toLocaleDateString()
 }
 
@@ -97,21 +75,24 @@ export function GitHubCommits() {
       try {
         setLoading(true)
         setError(null)
-        
+
         // Fetch recent public events for the user
         const response = await fetch(`https://api.github.com/users/LMSAIH/events/public?per_page=50`)
-        
+
+
         if (!response.ok) {
           throw new Error(`GitHub API responded with status: ${response.status}`)
         }
-        
+
         const data: GitHubEvent[] = await response.json()
-        
+
+        console.log(data)
+
         // Filter for push events (commits) and limit to recent ones
         const pushEvents = data
           .filter(event => event.type === 'PushEvent' && event.payload.commits && event.payload.commits.length > 0)
           .slice(0, 10) // Show last 10 commit activities
-        
+
         setEvents(pushEvents)
       } catch (err) {
         console.error('Error fetching GitHub events:', err)
@@ -127,24 +108,30 @@ export function GitHubCommits() {
   if (loading) {
     return (
       <div className="w-full">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-2">Recent Commits</h2>
-          <p className="text-muted-foreground">Latest activity from GitHub</p>
+        <div className="flex items-center gap-2 mb-6">
+          <GitCommit className="h-5 w-5" />
+          <h3 className="text-lg font-semibold">Recent Contributions</h3>
         </div>
-        <div className="space-y-4">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <CommitSkeleton key={i} />
+        <div className="flex flex-wrap gap-4">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="flex-1 min-w-[300px] p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+              <Skeleton className="h-4 w-3/4 mb-2" />
+              <Skeleton className="h-3 w-1/2 mb-3" />
+              <Skeleton className="h-3 w-full mb-1" />
+              <Skeleton className="h-3 w-2/3" />
+            </div>
           ))}
         </div>
       </div>
     )
   }
-  
+
   if (error) {
     return (
       <div className="w-full">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-2">Recent Commits</h2>
+        <div className="flex items-center gap-2 mb-6">
+          <GitCommit className="h-5 w-5" />
+          <h3 className="text-lg font-semibold">Recent Contributions</h3>
         </div>
         <Card className="border-red-200 dark:border-red-800">
           <CardContent className="pt-6">
@@ -162,8 +149,7 @@ export function GitHubCommits() {
     return (
       <div className="w-full">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-2">Recent Commits</h2>
-          <p className="text-muted-foreground">Latest activity from GitHub</p>
+          <h3 className="text-lg font-bold mb-2">Recent Contributions</h3>
         </div>
         <Card>
           <CardContent className="pt-6">
@@ -179,110 +165,74 @@ export function GitHubCommits() {
 
   return (
     <div className="w-full">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold mb-2">Recent Commits</h2>
-          <p className="text-muted-foreground">Latest activity from GitHub</p>
-        </div>
-        <Button variant="outline" asChild>
+      <div className="flex items-center gap-2 mb-6">
+        <h3 className="text-lg font-semibold">Recent Contributions</h3>
+      </div>
+
+      <div className="flex flex-wrap gap-4">
+        {events.map((event) => (
           <a
-            href="https://github.com/LMSAIH"
+            key={event.id}
+            href={`https://github.com/${event.repo.name}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2"
+            className="group block flex-1 min-w-[300px] p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md dark:hover:shadow-lg"
           >
-            View Profile
-            <ExternalLink className="h-4 w-4" />
-          </a>
-        </Button>
-      </div>
-      
-      <div className="space-y-4">
-        {events.map((event) => (
-          <Card key={event.id} className="hover:shadow-md transition-shadow">
-            <CardHeader className="pb-3">
-              <div className="flex items-start justify-between">
-                <div className="space-y-1 flex-1">
-                  <CardTitle className="text-lg leading-tight">
-                    <a
-                      href={`https://github.com/${event.repo.name}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-primary transition-colors flex items-center gap-2"
-                    >
-                      <GitCommit className="h-4 w-4" />
-                      {event.repo.name}
-                    </a>
-                  </CardTitle>
-                  
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <User className="h-3 w-3" />
-                      {event.actor.login}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {formatDate(event.created_at)}
-                    </div>
-                    <Badge variant="secondary" className="text-xs">
-                      {event.payload.commits?.length || 0} commit{(event.payload.commits?.length || 0) !== 1 ? 's' : ''}
-                    </Badge>
+            <div className="flex items-start justify-between">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 rounded-full  flex items-center justify-center flex-shrink-0">
+                    <GitCommit className="h-4 w-4 text-black dark:text-white" />
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                    <User className="h-3 w-3" />
+                    {event.actor.login}
+                    <span>•</span>
+                    <Calendar className="h-3 w-3" />
+                    {formatDate(event.created_at)}
                   </div>
                 </div>
-              </div>
-            </CardHeader>
-            
-            {event.payload.commits && event.payload.commits.length > 0 && (
-              <CardContent>
-                <div className="space-y-2">
-                  {event.payload.commits.slice(0, 3).map((commit, index) => (
-                    <div key={commit.sha} className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
-                      <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium leading-relaxed">
-                          {truncateMessage(commit.message)}
-                        </p>
-                        <div className="flex items-center gap-2 mt-1">
-                          <code className="text-xs bg-muted px-2 py-1 rounded font-mono">
-                            {commit.sha.substring(0, 7)}
-                          </code>
-                        </div>
-                      </div>
-                    </div>
+                
+                <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {event.repo.name}
+                </h4>
+                
+                <div className="space-y-1">
+                  {event.payload.commits?.slice(0, 2).map((commit) => (
+                    <p key={commit.sha} className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                      • {truncateMessage(commit.message)}
+                    </p>
                   ))}
-                  
-                  {event.payload.commits.length > 3 && (
-                    <div className="text-center pt-2">
-                      <Button variant="ghost" size="sm" asChild>
-                        <a
-                          href={`https://github.com/${event.repo.name}/commits/${event.payload.ref?.replace('refs/heads/', '') || 'main'}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          View {event.payload.commits.length - 3} more commits
-                        </a>
-                      </Button>
-                    </div>
+                  {(event.payload.commits?.length || 0) > 2 && (
+                    <p className="text-xs text-gray-500 dark:text-gray-500">
+                      +{(event.payload.commits?.length || 0) - 2} more commit{(event.payload.commits?.length || 0) - 2 !== 1 ? 's' : ''}
+                    </p>
                   )}
                 </div>
-              </CardContent>
-            )}
-          </Card>
+                
+                <div className="mt-2">
+                  <span className="inline-flex items-center px-0 py-1 rounded-full text-xs ">
+                    {event.payload.commits?.length || 0} commit{(event.payload.commits?.length || 0) !== 1 ? 's' : ''}
+                  </span>
+                </div>
+              </div>
+              
+              <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors flex-shrink-0 ml-3" />
+            </div>
+          </a>
         ))}
       </div>
-      
+
       <div className="mt-8 text-center">
-        <Button variant="outline" asChild>
-          <a
-            href="https://github.com/LMSAIH?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2"
-          >
-            View All Repositories
-            <ExternalLink className="h-4 w-4" />
-          </a>
-        </Button>
+        <a
+          href="https://github.com/LMSAIH?tab=repositories"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md dark:hover:shadow-lg"
+        >
+          View All Repositories
+          <ExternalLink className="h-4 w-4" />
+        </a>
       </div>
     </div>
   )
