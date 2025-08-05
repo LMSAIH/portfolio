@@ -14,31 +14,31 @@ type WorkExperience = {
 const workExperiences: WorkExperience[] = [
     {
         id: "1",
-        company: "Tech Corp",
-        position: "Senior Full Stack Developer",
-        logo: "TC", // Fallback to initials if no logo
-        startDate: "Jan 2022",
+        company: "Langara College Applied Research Centre",
+        position: "Web Developer & Research Assistant",
+        logo: "/company-logos/langara_arc_logo.jpeg", 
+        startDate: "May 2025",
         endDate: "Present",
-        description: "Led development of multiple web applications using React, Node.js, and TypeScript. Collaborated with cross-functional teams to deliver high-quality software solutions. Mentored junior developers and improved team productivity by 40%."
+        description: "Led website migration to React, Tailwind CSS, and Vite, which was then deployed to Vercel, cutting website maintenance costs by 100% while ensuring a seamless domain migration from the previously existing no-code tools.\n\nDocumented and showcased the now public repository which serves as another way to engage with the research project IDEA's in public recreation and the work done at the Langara College Applied Research Centre.\n\n Increased website performance metrics by 60%, and accessibility scores by 10%.",
     },
     {
         id: "2",
-        company: "StartupXYZ",
-        position: "Frontend Developer",
-        logo: "SX",
-        startDate: "Jun 2020",
-        endDate: "Dec 2021",
-        description: "Built responsive web applications using React and modern JavaScript. Worked closely with designers to implement pixel-perfect UI components. Optimized application performance and improved user experience metrics."
+        company: "Langara College",
+        position: "Engagement Kiosk Assistant",
+        logo: "/company-logos/langara-college.png",
+        startDate: "May 2025",
+        endDate: "Present",
+        description: "Added functionalities and organized the existing data collection scripts and reporting processes using Excel.\n\nEngaged with students and staff to provide information about college services and events.\n\nAssisted in managing the engagement kiosk, ensuring it was well-stocked and organized.",
     },
     {
         id: "3",
-        company: "Digital Agency",
-        position: "Web Developer",
-        logo: "DA",
-        startDate: "Mar 2018",
-        endDate: "May 2020",
-        description: "Developed custom WordPress themes and plugins. Created responsive websites for various clients across different industries. Implemented SEO best practices and improved website loading speeds."
-    }
+        company: "ResultsCX",
+        position: "Call Center Associate",
+        logo: "/company-logos/results-cx.jpeg",
+        startDate: "Jun 2023",
+        endDate: "Dec 2023",
+        description: "Provided exceptional customer support in a fast-paced, remote call center environment.\n\nDelivered clear and effective solutions by managing complex drivers and communicating efficiently with customers. \n\nConsistently maintained high-quality standards by adhering to strict protocols and resolving issues with a 100% first-call resolution rate. "
+    },
 ]
 
 const WorkExperienceItem = ({ experience }: { experience: WorkExperience }) => {
@@ -46,15 +46,6 @@ const WorkExperienceItem = ({ experience }: { experience: WorkExperience }) => {
 
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded)
-    }
-
-    const getInitials = (company: string) => {
-        return company
-            .split(' ')
-            .map(word => word[0])
-            .join('')
-            .toUpperCase()
-            .slice(0, 2)
     }
 
     return (
@@ -65,8 +56,8 @@ const WorkExperienceItem = ({ experience }: { experience: WorkExperience }) => {
             >
                 {/* Company Logo/Initials */}
                 <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
-                        {experience.logo || getInitials(experience.company)}
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                        <img src={experience.logo} alt={experience.company} className="w-full h-full rounded-full" />
                     </div>
                 </div>
 
@@ -100,7 +91,7 @@ const WorkExperienceItem = ({ experience }: { experience: WorkExperience }) => {
                         }`}
                     >
                         <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700">
-                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
                                 {experience.description}
                             </p>
                         </div>
