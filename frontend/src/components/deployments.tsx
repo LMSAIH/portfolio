@@ -2,7 +2,6 @@ import { DataTable } from "./deployments-table";
 import type { ColumnDef } from "@tanstack/react-table"
 import { ExternalLink, RefreshCw } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 
 export type Deployment = {
@@ -10,7 +9,7 @@ export type Deployment = {
     name: string
     description: string
     url: string
-    status: "online" | "offline" | "unknown" | "checking"
+    status: "online" | "offline" | "checking"
 }
 
 const StatusBadge = ({ status }: { status: Deployment["status"] }) => {
@@ -22,10 +21,6 @@ const StatusBadge = ({ status }: { status: Deployment["status"] }) => {
         offline: {
             label: "Offline",
             className: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400 border-red-200 dark:border-red-800"
-        },
-        unknown: {
-            label: "Unknown",
-            className: "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400 border-gray-200 dark:border-gray-800"
         },
         checking: {
             label: "Checking...",
@@ -55,7 +50,7 @@ export const columns: ColumnDef<Deployment>[] = [
         accessorKey: "description",
         header: "Description",
         cell: ({ row }) => (
-            <div className="max-w-[500px] truncate text-muted-foreground">
+            <div className="max-w-[500px] min-w-[400px] text-muted-foreground whitespace-pre-wrap break-words">
                 {row.getValue("description")}
             </div>
         ),
@@ -88,30 +83,37 @@ export const columns: ColumnDef<Deployment>[] = [
 const initialData: Deployment[] = [
     {
         id: "dep_001",
-        name: "Portfolio Website",
-        description: "Personal portfolio built with React and TypeScript",
-        url: "https://myportfolio.com",
+        name: "Concpt",
+        description: "Concpt is a platform that helps you plan, design, share and edit your projects. It is a powerful tool for developers and designers that can generate structured project outlines in one prompt. It offers complete freedom to create and edit your projects.",
+        url: "https://concpt.dev",
         status: "checking"
     },
     {
         id: "dep_002",
-        name: "E-commerce Platform",
-        description: "Full-stack e-commerce application with payment integration",
-        url: "https://axel.dadawd",
+        name: "Innovate Recreation",
+        description: "Innovate Recreation is a research initiative focused on the experiences of immigrant and racialized communities in British Columbia's public recreation. ",
+        url: "https://innovaterecreation.ca/",
         status: "checking"
     },
     {
         id: "dep_003",
-        name: "Task Manager",
-        description: "Collaborative task management tool with real-time updates",
-        url: "https://taskmanager.com",
+        name: "Neosana",
+        description: "Neosana is a application that helps you centralize medical records and health data. It is designed to be a comprehensive health management tool that connects patients and healthcare providers.",
+        url: "https://neosana.app",
         status: "checking"
     },
     {
-        id: "dep_004",
-        name: "Weather Dashboard",
-        description: "Real-time weather application with geolocation support",
-        url: "https://weatherapp.com",
+            id: "dep_004",
+            name: "ProfitSNFT",
+            description: "ProfitSNFT is a website created for a student-led case-studies simulator that takes place every year at the Autonomous University of the State of Mexico.",
+            url: "https://www.profitsnft.org/",
+            status: "checking"
+    },
+    {
+        id: "dep_005",
+        name: "Langara French Club",
+        description: "The website for the Langara French Club. Featuring the club members, events, contact and much more.",
+        url: "https://langarafr.com",
         status: "checking"
     },
 ];
@@ -158,7 +160,7 @@ export function Deployments() {
 
     return (
         <div className="w-full">
-            <DataTable columns={columns} data={data} />
+            <DataTable columns={columns} data={data} title="Deployments" />
         </div>
     )
 }
