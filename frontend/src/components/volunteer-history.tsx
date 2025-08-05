@@ -14,31 +14,32 @@ type VolunteerExperience = {
 const volunteerExperiences: VolunteerExperience[] = [
     {
         id: "1",
-        organization: "Local Food Bank",
-        role: "Tech Volunteer",
-        logo: "LF",
-        startDate: "Jan 2023",
+        organization: "UNAC-Vancouver",
+        role: "Advisory Council Member",
+        logo: "/company-logos/unac-v.jpg",
+        startDate: "May 2025",
         endDate: "Present",
-        description: "Developed and maintain a web application for inventory management and volunteer coordination. Built a responsive dashboard that helped increase operational efficiency by 30%. Provide ongoing technical support and training to staff members."
+        description: "Working closely with the UNAC-Vancouver team for the development of the UNAC-Vancouver website, which is a platform that connects local communities with resources and support for sustainable development. My role involves providing technical guidance, ensuring the website meets accessibility standards, and enhancing user experience through continuous improvements.",
     },
     {
         id: "2",
-        organization: "Code for Good",
-        role: "Lead Developer",
-        logo: "CG",
-        startDate: "Mar 2022",
-        endDate: "Dec 2022",
-        description: "Led a team of volunteer developers to create open-source solutions for non-profit organizations. Mentored junior developers and coordinated project timelines. Successfully delivered 3 major projects benefiting local communities."
+        organization: "Langara French Club",
+        role: "Head of IT",
+        logo: "/company-logos/french-club.png",
+        startDate: "Sep 2024",
+        endDate: "Present",
+        description: "Responsible for the development and maintenance of the Langara French Club's website and internal tools. Collaborating with club members to enhance existing tools and creating new ones to improve the club's operations."
     },
     {
         id: "3",
-        organization: "Youth Coding Initiative",
-        role: "Mentor",
-        logo: "YC",
-        startDate: "Sep 2021",
-        endDate: "Feb 2022",
-        description: "Taught programming fundamentals to underserved youth aged 12-18. Developed curriculum materials and hands-on coding workshops. Helped 25+ students build their first web applications and sparked interest in technology careers."
-    }
+        organization: "Langara Computer Science Club",
+        role: "Software Developer",
+        logo: "/company-logos/langaracpsc.png",
+        startDate: "Jan 2025",
+        endDate: "July 2025",
+        description: "Lead Developer for internal scheduling software initiative, guiding a team from concept to deployment.\n\nDeveloped and delivered didactic materials to mentor 50+ attendees at weekly events, effectively teaching fundamentals and best practices, simplifying complex problems and providing clear solutions"
+    },
+
 ]
 
 const VolunteerExperienceItem = ({ experience }: { experience: VolunteerExperience }) => {
@@ -46,15 +47,6 @@ const VolunteerExperienceItem = ({ experience }: { experience: VolunteerExperien
 
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded)
-    }
-
-    const getInitials = (organization: string) => {
-        return organization
-            .split(' ')
-            .map(word => word[0])
-            .join('')
-            .toUpperCase()
-            .slice(0, 2)
     }
 
     return (
@@ -65,8 +57,8 @@ const VolunteerExperienceItem = ({ experience }: { experience: VolunteerExperien
             >
                 {/* Organization Logo/Initials */}
                 <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-red-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
-                        {experience.logo || getInitials(experience.organization)}
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                        <img src={experience.logo} alt={experience.organization} className="w-full h-full rounded-full" />
                     </div>
                 </div>
 
@@ -93,13 +85,12 @@ const VolunteerExperienceItem = ({ experience }: { experience: VolunteerExperien
                         </div>
                     </div>
 
-                    <div 
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                            isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                        }`}
+                    <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                            }`}
                     >
                         <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
                                 {experience.description}
                             </p>
                         </div>
