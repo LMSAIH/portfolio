@@ -11,31 +11,19 @@ type Hackathon = {
 const hackathons: Hackathon[] = [
     {
         id: "1",
-        name: "TechCrunch Disrupt Hackathon 2024",
-        award: "1st Place - Best AI Application",
-        devpostUrl: "https://devpost.com/software/your-project-1",
+        name: "Project0",
+        award: "Winner - 1st Place",
+        devpostUrl: "https://devpost.com/software/devmatrix",
 
     },
     {
         id: "2",
-        name: "NASA Space Apps Challenge",
-        award: "Winner - Earth Category",
-        devpostUrl: "https://devpost.com/software/your-project-2",
+        name: "LangaraHacks 2024",
+        award: "Winner - Raffle Prizes",
+        devpostUrl: "https://devpost.com/software/hacksbricsteam",
 
     },
-    {
-        id: "3",
-        name: "MLH Local Hack Day",
-        award: "2nd Place - Most Creative Solution",
-        devpostUrl: "https://devpost.com/software/your-project-3",
-    },
-    {
-        id: "4",
-        name: "HackTheNorth 2022",
-        award: "Finalist - Best Social Impact",
-        devpostUrl: "https://devpost.com/software/your-project-4",
-   
-    }
+
 ]
 
 export const Hackathons = () => {
