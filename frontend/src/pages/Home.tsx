@@ -1,4 +1,5 @@
 import { Deployments } from "@/components/deployments";
+import { FeaturedProjects } from "@/components/featured-projects";
 import { GitHubCommits } from "@/components/github-commits";
 import { WorkHistory } from "@/components/work-history";
 import { VolunteerHistory } from "@/components/volunteer-history";
@@ -12,11 +13,12 @@ const Home: React.FC = () => {
         <div className="py-24 lg:py-32 px-4 mx-auto max-w-7xl">
             <Tabs defaultValue="portfolio" className="w-full">
 
-                <div className="mb-8 flex justify-left">
-                    <TabsList className="inline-flex h-9 items-center justify-center rounded-lg p-1 text-muted-foreground">
-                        <TabsTrigger value="portfolio" className="px-4 py-1.5 text-sm">Portfolio</TabsTrigger>
-                        <TabsTrigger value="contributions" className="px-4 py-1.5 text-sm">OSS Contributions</TabsTrigger>
-                        <TabsTrigger value="tech-stack" className="px-4 py-1.5 text-sm">Tech Stack</TabsTrigger>
+                <div className="mb-10 flex justify-center lg:justify-start">
+                    <TabsList className="inline-flex h-9 items-center justify-center lg:justify-left rounded-lg  text-muted-foreground flex-wrap gap-y-2">
+                        <TabsTrigger value="portfolio" className="px-3 lg:px-4 py-1.5 text-sm">Portfolio</TabsTrigger>
+                        <TabsTrigger value="projects" className="px-3 lg:px-4 py-1.5 text-sm">Projects</TabsTrigger>
+                        <TabsTrigger value="contributions" className="px-3 lg:px-4 py-1.5 text-sm">Contributions</TabsTrigger>
+                        <TabsTrigger value="tech-stack" className="px-3 lg:px-4 py-1.5 text-sm">Stack</TabsTrigger>
                     </TabsList>
                 </div>
 
@@ -27,6 +29,10 @@ const Home: React.FC = () => {
                         </p>
                         <p className="mb-4">
                             I enjoy working with non-profits and regularly contribute to open source projects. Helping to shape a better world within your field is not only rewarding, it's human.
+                        </p>
+
+                        <p className="mb-4">
+                            If you are interested on any of my work, almost everything is publicly available on my <a href="https://github.com/LMSAIH" target="_blank" rel="noopener noreferrer" className="font-medium underline">GitHub</a>. If it isn't but you'd like to inquire about it, feel free to reach out to me via email.
                         </p>
                     </div>
 
@@ -42,6 +48,10 @@ const Home: React.FC = () => {
 
                     <GitHubCalendar username="LMSAIH" />
 
+                </TabsContent>
+
+                <TabsContent value="projects" className="space-y-8">
+                    <FeaturedProjects />
                 </TabsContent>
 
                 <TabsContent value="contributions" className="space-y-8">
