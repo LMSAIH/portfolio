@@ -1,7 +1,6 @@
 "use client"
 import * as React from "react"
 import type { ColumnDef, ColumnFiltersState } from "@tanstack/react-table"
-import type { Deployment } from "@/components/deployments"
 import {
   flexRender,
   getCoreRowModel,
@@ -31,11 +30,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  title: string
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  title
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -52,10 +53,25 @@ export function DataTable<TData, TValue>({
     },
   })
 
+  // Extract unique status values from the data
+  const statusValues = React.useMemo(() => {
+    const statusColumn = table.getColumn("status")
+    if (!statusColumn) return []
+    
+    const uniqueStatuses = new Set<string>()
+    data.forEach((row: any) => {
+      if (row.status) {
+        uniqueStatuses.add(row.status)
+      }
+    })
+    
+    return Array.from(uniqueStatuses).sort()
+  }, [data, table])
+
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        <h3 className="text-lg font-semibold">Deployments</h3>
+        <h3 className="text-lg font-semibold">{title}</h3>
 
         {/* Status Filter */}
         <DropdownMenu>
@@ -67,7 +83,7 @@ export function DataTable<TData, TValue>({
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Status</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            {["online", "offline", "unknown", "checking"].map((status) => {
+            {statusValues.map((status) => {
               const isFiltered = table.getColumn("status")?.getFilterValue() === status
               return (
                 <DropdownMenuCheckboxItem
