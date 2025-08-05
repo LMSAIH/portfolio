@@ -4,7 +4,11 @@ import {
     FaPython, 
     FaDocker, 
     FaGitAlt, 
-    FaAws 
+    FaAws ,
+    FaHtml5,
+    FaCss3Alt,
+    FaJsSquare,
+    
 } from "react-icons/fa"
 import { 
     SiTypescript, 
@@ -12,7 +16,13 @@ import {
     SiTailwindcss, 
     SiPostgresql, 
     SiMongodb, 
-    SiVercel 
+    SiVercel,
+    SiVite,
+    SiFastapi,
+    SiSupabase,
+    SiFirebase,
+    SiRedis,
+    SiOpenai
 } from "react-icons/si"
 
 type Technology = {
@@ -28,14 +38,30 @@ const technologies: Technology[] = [
     // Frontend
     {
         id: "1",
-        name: "React",
+        name: "HTML5",
         category: "Frontend",
-        icon: FaReact,
-        url: "https://reactjs.org",
-        description: "JavaScript library for building user interfaces"
+        icon: FaHtml5,
+        url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+        description: "Markup language for creating web pages"
     },
     {
         id: "2",
+        name: "CSS3",
+        category: "Frontend",
+        icon: FaCss3Alt,
+        url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+        description: "Style sheet language for styling web pages"
+    },
+    {
+        id: "3",
+        name: "JavaScript",
+        category: "Frontend",
+        icon: FaJsSquare,
+        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        description: "Programming language for web development"
+    },
+    {
+        id: "4",
         name: "TypeScript",
         category: "Frontend",
         icon: SiTypescript,
@@ -43,7 +69,15 @@ const technologies: Technology[] = [
         description: "Typed superset of JavaScript"
     },
     {
-        id: "3",
+        id: "5",
+        name: "React",
+        category: "Frontend",
+        icon: FaReact,
+        url: "https://reactjs.org",
+        description: "JavaScript library for building user interfaces"
+    },
+    {
+        id: "6",
         name: "Next.js",
         category: "Frontend",
         icon: SiNextdotjs,
@@ -51,16 +85,24 @@ const technologies: Technology[] = [
         description: "React framework for production"
     },
     {
-        id: "4",
+        id: "7",
         name: "Tailwind CSS",
         category: "Frontend",
         icon: SiTailwindcss,
         url: "https://tailwindcss.com",
         description: "Utility-first CSS framework"
     },
+    {
+        id: "8",
+        name: "Vite",
+        category: "Frontend",
+        icon: SiVite,
+        url: "https://vitejs.dev",
+        description: "Fast build tool and development server"
+    },
     // Backend
     {
-        id: "5",
+        id: "9",
         name: "Node.js",
         category: "Backend",
         icon: FaNodeJs,
@@ -68,7 +110,7 @@ const technologies: Technology[] = [
         description: "JavaScript runtime built on Chrome's V8"
     },
     {
-        id: "6",
+        id: "10",
         name: "Python",
         category: "Backend",
         icon: FaPython,
@@ -76,7 +118,15 @@ const technologies: Technology[] = [
         description: "High-level programming language"
     },
     {
-        id: "7",
+        id: "11",
+        name: "FastAPI",
+        category: "Backend",
+        icon: SiFastapi,
+        url: "https://fastapi.tiangolo.com",
+        description: "Modern Python web framework for APIs"
+    },
+    {
+        id: "12",
         name: "PostgreSQL",
         category: "Backend",
         icon: SiPostgresql,
@@ -84,16 +134,40 @@ const technologies: Technology[] = [
         description: "Advanced open source relational database"
     },
     {
-        id: "8",
+        id: "13",
         name: "MongoDB",
         category: "Backend",
         icon: SiMongodb,
         url: "https://mongodb.com",
         description: "Document-based NoSQL database"
     },
+    {
+        id: "14",
+        name: "Supabase",
+        category: "Backend",
+        icon: SiSupabase,
+        url: "https://supabase.com",
+        description: "Open source Firebase alternative"
+    },
+    {
+        id: "15",
+        name: "Firebase",
+        category: "Backend",
+        icon: SiFirebase,
+        url: "https://firebase.google.com",
+        description: "Google's mobile and web development platform"
+    },
+    {
+        id: "16",
+        name: "Redis",
+        category: "Backend",
+        icon: SiRedis,
+        url: "https://redis.io",
+        description: "In-memory data structure store"
+    },
     // Tools & DevOps
     {
-        id: "9",
+        id: "17",
         name: "Docker",
         category: "DevOps",
         icon: FaDocker,
@@ -101,7 +175,7 @@ const technologies: Technology[] = [
         description: "Platform for developing, shipping, and running applications"
     },
     {
-        id: "10",
+        id: "18",
         name: "Git",
         category: "DevOps",
         icon: FaGitAlt,
@@ -109,7 +183,7 @@ const technologies: Technology[] = [
         description: "Distributed version control system"
     },
     {
-        id: "11",
+        id: "19",
         name: "AWS",
         category: "DevOps",
         icon: FaAws,
@@ -117,7 +191,7 @@ const technologies: Technology[] = [
         description: "Cloud computing services"
     },
     {
-        id: "12",
+        id: "20",
         name: "Vercel",
         category: "DevOps",
         icon: SiVercel,
