@@ -131,6 +131,8 @@ const checkUrlStatus = async (url: string): Promise<"online" | "offline"> => {
             signal: controller.signal,
         });
 
+        console.log(response.ok);
+
         clearTimeout(timeoutId);
 
         // In no-cors mode, we can't read the status, but if fetch succeeds, the site is likely online

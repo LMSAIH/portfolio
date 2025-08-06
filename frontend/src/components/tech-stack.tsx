@@ -22,7 +22,7 @@ import {
     SiSupabase,
     SiFirebase,
     SiRedis,
-    SiOpenai
+    
 } from "react-icons/si"
 
 type Technology = {
