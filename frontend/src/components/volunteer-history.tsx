@@ -19,7 +19,7 @@ const volunteerExperiences: VolunteerExperience[] = [
         logo: "/company-logos/unac-v.jpg",
         startDate: "May 2025",
         endDate: "Present",
-        description: "Working closely with the UNAC-Vancouver team for the development of the UNAC-Vancouver website, which is a platform that connects local communities with resources and support for sustainable development. My role involves providing technical guidance, ensuring the website meets accessibility standards, and enhancing user experience through continuous improvements.",
+        description: "Working closely with the UNAC-Vancouver team for the development of the UNAC-Vancouver website, which advocates the United Nations and sustainable development goals (SDG's). My role involves providing technical guidance, ensuring the website meets accessibility standards, and enhancing user experience through continuous improvements.",
     },
     {
         id: "2",
