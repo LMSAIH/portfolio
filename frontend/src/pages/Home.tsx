@@ -18,21 +18,21 @@ const Home: React.FC = () => {
                         <TabsTrigger value="portfolio" className="px-3 lg:px-4 py-1.5 text-sm">Portfolio</TabsTrigger>
                         <TabsTrigger value="projects" className="px-3 lg:px-4 py-1.5 text-sm">Projects</TabsTrigger>
                         <TabsTrigger value="contributions" className="px-3 lg:px-4 py-1.5 text-sm">Contributions</TabsTrigger>
-                        <TabsTrigger value="tech-stack" className="px-3 lg:px-4 py-1.5 text-sm">Stack</TabsTrigger>
                     </TabsList>
                 </div>
 
                 <TabsContent value="portfolio" className="space-y-8">
                     <div className="text-left w-full lg:w-1/2">
-                        <p className="mb-4">
-                            I am Axel Velasquez, a fullstack developer who loves building, testing and shipping applications.
-                        </p>
+                        <h1 className="mb-4">
+                            I am <span className="font-medium">Axel Velasquez</span>, a fullstack developer who loves building, testing and shipping applications.
+                        </h1>
+
                         <p className="mb-4">
                             I enjoy working with non-profits and regularly contribute to open source projects. Helping to shape a better world within your field is not only rewarding, it's human.
                         </p>
 
                         <p className="mb-4">
-                            If you are interested on any of my work, almost everything is publicly available on my <a href="https://github.com/LMSAIH" target="_blank" rel="noopener noreferrer" className="font-medium underline">GitHub</a>. If it isn't but you'd like to inquire about it, feel free to reach out to me via email.
+                            If you are interested in any of my work, almost everything is publicly available on my <a href="https://github.com/LMSAIH" target="_blank" rel="noopener noreferrer" className="font-medium underline">GitHub</a>. If it isn't but you'd like to inquire about it, feel free to reach out to me via email.
                         </p>
                     </div>
 
@@ -41,6 +41,10 @@ const Home: React.FC = () => {
                     <WorkHistory />
 
                     <VolunteerHistory />
+
+                    <h3 className="text-lg font-semibold">Tech Stack</h3>
+
+                    <TechStack />
 
                     <Hackathons />
 
@@ -59,9 +63,6 @@ const Home: React.FC = () => {
                     <GitHubCommits />
                 </TabsContent>
 
-                <TabsContent value="tech-stack" className="space-y-8">
-                    <TechStack />
-                </TabsContent>
             </Tabs>
         </div>
     );
