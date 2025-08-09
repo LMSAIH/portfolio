@@ -14,7 +14,7 @@ const Navigation: React.FC = () => {
                         asChild
                     >
                         <a 
-                            href="https://linkedin.com/in/yourprofile" 
+                            href="https://www.linkedin.com/in/axel-gael-velasquez-castaneda-1a4075323/" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             aria-label="LinkedIn Profile"
@@ -29,7 +29,7 @@ const Navigation: React.FC = () => {
                         asChild
                     >
                         <a 
-                            href="https://github.com/yourusername" 
+                            href="https://github.com/LMSAIH" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             aria-label="GitHub Profile"
@@ -44,7 +44,7 @@ const Navigation: React.FC = () => {
                         asChild
                     >
                         <a 
-                            href="mailto:your.email@gmail.com"
+                            href="mailto:axel.velascast@gmail.com"
                             aria-label="Send Email"
                         >
                             <FaEnvelope className="h-4 w-4" />
