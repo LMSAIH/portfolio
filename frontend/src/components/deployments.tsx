@@ -124,20 +124,20 @@ async function checkUrlStatus(url: string) {
 
         void await fetch(url, { method: 'HEAD', mode: 'no-cors' });
         return true;
-        
+
     } catch (error) {
         return false;
     }
 }
 
-export function Deployments() {
+function Deployments() {
     const [data, setData] = useState<Deployment[]>(initialData);
 
     useEffect(() => {
         const checkStatuses = async () => {
             const updatedData = await Promise.all(
                 initialData.map(async (deployment) => {
-                    const status = (await checkUrlStatus(deployment.url)) ? "online" : "offline";
+                    const status: Deployment["status"] = (await checkUrlStatus(deployment.url)) ? "online" : "offline";
                     return { ...deployment, status };
                 })
             );
@@ -153,3 +153,6 @@ export function Deployments() {
         </div>
     )
 }
+
+export { Deployments };
+export default Deployments;

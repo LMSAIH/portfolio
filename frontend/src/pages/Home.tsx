@@ -1,12 +1,16 @@
-import { Deployments } from "@/components/deployments";
-import { FeaturedProjects } from "@/components/featured-projects";
-import { GitHubCommits } from "@/components/github-commits";
-import { WorkHistory } from "@/components/work-history";
-import { VolunteerHistory } from "@/components/volunteer-history";
-import { Hackathons } from "@/components/hackathons";
-import { TechStack } from "@/components/tech-stack";
+import { lazy, Suspense } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Skeleton } from "@/components/ui/skeleton";
 import GitHubCalendar from 'react-github-calendar';
+
+// Lazy-loaded components (loaded when needed)
+const Deployments = lazy(() => import("@/components/deployments").then(mod => ({ default: mod.Deployments })));
+const FeaturedProjects = lazy(() => import("@/components/featured-projects").then(mod => ({ default: mod.FeaturedProjects })));
+const GitHubCommits = lazy(() => import("@/components/github-commits").then(mod => ({ default: mod.GitHubCommits })));
+const WorkHistory = lazy(() => import("@/components/work-history").then(mod => ({ default: mod.WorkHistory })));
+const VolunteerHistory = lazy(() => import("@/components/volunteer-history").then(mod => ({ default: mod.VolunteerHistory })));
+const Hackathons = lazy(() => import("@/components/hackathons").then(mod => ({ default: mod.Hackathons })));
+const TechStack = lazy(() => import("@/components/tech-stack").then(mod => ({ default: mod.TechStack })));
 
 const Home: React.FC = () => {
     return (
@@ -36,31 +40,46 @@ const Home: React.FC = () => {
                         </p>
                     </div>
 
-                    <Deployments />
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
+                        <Deployments />
+                    </Suspense>
 
-                    <WorkHistory />
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
+                        <WorkHistory />
+                    </Suspense>
 
-                    <VolunteerHistory />
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
+                        <VolunteerHistory />
+                    </Suspense>
 
                     <h3 className="text-lg font-semibold">Tech Stack</h3>
 
-                    <TechStack />
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
+                        <TechStack />
+                    </Suspense>
 
-                    <Hackathons />
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
+                        <Hackathons />
+                    </Suspense>
 
                     <h3 className="text-lg font-semibold">Github Contribution Graph</h3>
 
-                    <GitHubCalendar username="LMSAIH" />
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-32 w-full" /></div>}>
+                        <GitHubCalendar username="LMSAIH" />
+                    </Suspense>
 
                 </TabsContent>
 
                 <TabsContent value="projects" className="space-y-8">
-                    <FeaturedProjects />
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
+                        <FeaturedProjects />
+                    </Suspense>
                 </TabsContent>
 
                 <TabsContent value="contributions" className="space-y-8">
-
-                    <GitHubCommits />
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
+                        <GitHubCommits />
+                    </Suspense>
                 </TabsContent>
 
             </Tabs>

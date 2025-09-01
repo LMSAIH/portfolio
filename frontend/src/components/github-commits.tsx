@@ -237,3 +237,5 @@ export function GitHubCommits() {
     </div>
   )
 }
+
+export default GitHubCommits;
