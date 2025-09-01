@@ -103,11 +103,11 @@ const initialData: Deployment[] = [
         status: "checking"
     },
     {
-            id: "dep_004",
-            name: "ProfitSNFT",
-            description: "ProfitSNFT is a website created for a student-led case-studies simulator that takes place every year at the Autonomous University of the State of Mexico.",
-            url: "https://www.profitsnft.org/",
-            status: "checking"
+        id: "dep_004",
+        name: "ProfitSNFT",
+        description: "ProfitSNFT is a website created for a student-led case-studies simulator that takes place every year at the Autonomous University of the State of Mexico.",
+        url: "https://www.profitsnft.org/",
+        status: "checking"
     },
     {
         id: "dep_005",
@@ -118,30 +118,17 @@ const initialData: Deployment[] = [
     },
 ];
 
-// Function to check if a URL is reachable
-const checkUrlStatus = async (url: string): Promise<"online" | "offline"> => {
+
+async function checkUrlStatus(url: string) {
     try {
-        // Use a CORS proxy or direct fetch with no-cors mode
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
-        const response = await fetch(url, {
-            method: 'HEAD',
-            mode: 'no-cors',
-            signal: controller.signal,
-        });
-
-        console.log(response.ok);
-
-        clearTimeout(timeoutId);
-
-        // In no-cors mode, we can't read the status, but if fetch succeeds, the site is likely online
-        return "online";
+        void await fetch(url, { method: 'HEAD', mode: 'no-cors' });
+        return true;
+        
     } catch (error) {
-        // If fetch fails, the site is likely offline or unreachable
-        return "offline";
+        return false;
     }
-};
+}
 
 export function Deployments() {
     const [data, setData] = useState<Deployment[]>(initialData);
@@ -150,7 +137,7 @@ export function Deployments() {
         const checkStatuses = async () => {
             const updatedData = await Promise.all(
                 initialData.map(async (deployment) => {
-                    const status = await checkUrlStatus(deployment.url);
+                    const status = (await checkUrlStatus(deployment.url)) ? "online" : "offline";
                     return { ...deployment, status };
                 })
             );

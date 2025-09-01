@@ -57,7 +57,7 @@ const WorkExperienceItem = ({ experience }: { experience: WorkExperience }) => {
                 {/* Company Logo/Initials */}
                 <div className="flex-shrink-0">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
-                        <img src={experience.logo} alt={experience.company} className="w-full h-full rounded-full" />
+                        <img src={experience.logo} alt={experience.company} className="w-full h-full rounded-full" width={48} height={48} />
                     </div>
                 </div>
 
