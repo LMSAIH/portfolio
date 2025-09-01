@@ -33,14 +33,50 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap"></noscript>
     
+    <!-- Critical Resource Preloading -->
+    <link rel="preload" href="/assets/index-BHNgRz4w.css" as="style">
+    <link rel="preload" href="/assets/index-BU-r2lTM.js" as="script">
+    <link rel="preload" href="/assets/deployments-DyfSUq_R.js" as="script">
+    <link rel="preload" href="/assets/badge-CYm4fNlu.js" as="script">
+    
+    <!-- DNS Prefetch for External Resources -->
+    <link rel="dns-prefetch" href="https://concpt.dev">
+    <link rel="dns-prefetch" href="https://innovaterecreation.ca">
+    <link rel="dns-prefetch" href="https://www.profitsnft.org">
+    <link rel="dns-prefetch" href="https://github-contributions-api.jogruber.de">
+    
     <!-- Additional SEO -->
     <meta name="theme-color" content="#000000" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Critical Rendering Performance -->
+    <link rel="stylesheet" href="/assets/index-BHNgRz4w.css">
+    <script>
+      // Inline script to preload dynamic imports
+      const preloadLinks = [
+        '/assets/work-hist….js',
+        '/assets/volunteer-history-DWprpCsJ.js',
+        '/assets/tech-stac….js'
+      ];
+      
+      // Create preload links with low priority
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => {
+          preloadLinks.forEach(url => {
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = url;
+            document.head.appendChild(link);
+          });
+        });
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
