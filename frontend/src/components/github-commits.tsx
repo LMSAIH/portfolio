@@ -79,7 +79,6 @@ export function GitHubCommits() {
         // Fetch recent public events for the user
         const response = await fetch(`https://api.github.com/users/LMSAIH/events/public?per_page=50`)
 
-
         if (!response.ok) {
           throw new Error(`GitHub API responded with status: ${response.status}`)
         }
