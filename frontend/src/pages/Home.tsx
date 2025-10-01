@@ -11,6 +11,7 @@ const WorkHistory = lazy(() => import("@/components/work-history").then(mod => (
 const VolunteerHistory = lazy(() => import("@/components/volunteer-history").then(mod => ({ default: mod.VolunteerHistory })));
 const Hackathons = lazy(() => import("@/components/hackathons").then(mod => ({ default: mod.Hackathons })));
 const TechStack = lazy(() => import("@/components/tech-stack").then(mod => ({ default: mod.TechStack })));
+const Education = lazy(() => import("@/components/education").then(mod => ({ default: mod.Education })));
 
 const Home: React.FC = () => {
     return (
@@ -42,6 +43,10 @@ const Home: React.FC = () => {
 
                     <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
                         <Deployments />
+                    </Suspense>
+
+                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
+                        <Education />
                     </Suspense>
 
                     <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
