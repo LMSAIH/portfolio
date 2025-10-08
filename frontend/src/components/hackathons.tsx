@@ -12,7 +12,7 @@ const hackathons: Hackathon[] = [
     {
         id: "1",
         name: "StormHacks 2025",
-        award: "Finalist, Best Design, United Nations Sustainable Development Goals Enactus Challenge 2nd place",
+        award: "Winner - Finalist, Best Design, United Nations Sustainable Development Goals Enactus Challenge 2nd place",
         devpostUrl: "https://devpost.com/software/mapd-urban-development-intelligence",
     },
     {
