@@ -19,7 +19,7 @@ const workExperiences: WorkExperience[] = [
         logo: "/company-logos/langara_arc_logo.jpeg", 
         startDate: "May 2025",
         endDate: "Present",
-        description: "Led website migration to React, Tailwind CSS, and Vite, which was then deployed to Vercel, cutting website maintenance costs by 100% while ensuring a seamless domain migration from the previously existing no-code tools.\n\nDocumented and showcased the now public repository which serves as another way to engage with the research project IDEA's in public recreation and the work done at the Langara College Applied Research Centre.\n\n Increased website performance metrics by 60%, and accessibility scores by 10%.",
+        description: "As a Web Developer and Research Assistant at the Langara College Applied Research Centre, I spearheaded the complete migration of the center's website to a modern tech stack using React, Tailwind CSS, and Vite. This migration was successfully deployed to Vercel, eliminating website maintenance costs by 100% while ensuring a seamless transition from the previously existing no-code tools. I documented and showcased the now-public repository, which serves as an additional channel to engage with the research project IDEAS in public recreation and highlight the important work being done at the Applied Research Centre. Through these efforts, I achieved a 60% increase in website performance metrics and improved accessibility scores by 10%.",
     },
     {
         id: "2",
@@ -28,7 +28,7 @@ const workExperiences: WorkExperience[] = [
         logo: "/company-logos/langara-college.png",
         startDate: "May 2025",
         endDate: "Present",
-        description: "Added functionalities and organized the existing data collection scripts and reporting processes using Excel.\n\nEngaged with students and staff to provide information about college services and events.\n\nAssisted in managing the engagement kiosk, ensuring it was well-stocked and organized.",
+        description: "In my role as an Engagement Kiosk Assistant, I enhance the student experience by adding new functionalities and organizing existing data collection scripts and reporting processes using Excel. I actively engage with students and staff daily to provide comprehensive information about college services, events, and resources. Additionally, I manage the engagement kiosk operations, ensuring it remains well-stocked, organized, and accessible to serve the diverse needs of the Langara College community.",
     },
     {
         id: "3",
@@ -37,7 +37,7 @@ const workExperiences: WorkExperience[] = [
         logo: "/company-logos/results-cx.jpeg",
         startDate: "Jun 2023",
         endDate: "Dec 2023",
-        description: "Provided exceptional customer support in a fast-paced, remote call center environment.\n\nDelivered clear and effective solutions by managing complex drivers and communicating efficiently with customers. \n\nConsistently maintained high-quality standards by adhering to strict protocols and resolving issues with a 100% first-call resolution rate. "
+        description: "As a Call Center Associate at ResultsCX, I provided exceptional customer support in a fast-paced, remote call center environment. I delivered clear and effective solutions by managing complex customer inquiries and communicating efficiently with diverse clientele. Throughout my tenure, I consistently maintained high-quality standards by adhering to strict company protocols and successfully resolving customer issues with a 100% first-call resolution rate, demonstrating my commitment to customer satisfaction and operational excellence."
     },
 ]
 
