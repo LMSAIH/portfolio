@@ -82,6 +82,13 @@ export const columns: ColumnDef<Deployment>[] = [
 
 const initialData: Deployment[] = [
     {
+        id: "dep_006",
+        name: "MapD",
+        description: "MapD is a geospatial platform that aggregates data from multiple public datasets and displays it on an interactive map. It provides a comprehensive analysis enriched by public data, it creates beautiful, easy-to-understand visualizations of urban development projects.\n\n Drop a pin anywhere on the map to receive an instant analysis of a hypothetical development project at that location. Currently visualizes active projects in Vancouver and their community impacts based on existing infrastructure.",
+        url: "https://mapd.tech/",
+        status: "checking"
+    },
+    {
         id: "dep_001",
         name: "Concpt",
         description: "Concpt is a platform that helps you plan, design, share and edit your projects. It is a powerful tool for developers and designers that can generate structured project outlines in one prompt. It offers complete freedom to create and edit your projects.",
@@ -98,7 +105,7 @@ const initialData: Deployment[] = [
     {
         id: "dep_003",
         name: "Neosana",
-        description: "Neosana is a application that helps you centralize medical records and health data. It is designed to be a comprehensive health management tool that connects patients and healthcare providers.",
+        description: "Neosana is an application that helps you centralize medical records and health data. It is designed to be a comprehensive health management tool that connects patients and healthcare providers.",
         url: "https://neosana.app",
         status: "checking"
     },
@@ -149,7 +156,7 @@ function Deployments() {
 
     return (
         <div className="w-full">
-            <DataTable columns={columns} data={data} title="Deployments" />
+            <DataTable columns={columns} data={data} title="Showcase" />
         </div>
     )
 }
