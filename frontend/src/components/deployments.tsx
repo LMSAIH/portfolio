@@ -80,6 +80,7 @@ export const columns: ColumnDef<Deployment>[] = [
     },
 ]
 
+
 const initialData: Deployment[] = [
     {
         id: "dep_006",
