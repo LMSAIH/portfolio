@@ -153,6 +153,7 @@ function Deployments() {
         };
 
         checkStatuses();
+        
     }, []);
 
     return (
