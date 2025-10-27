@@ -105,24 +105,6 @@ const EducationItem = ({ education }: { education: Education }) => {
                                 {education.description}
                             </p>
 
-                            {education.coursework && education.coursework.length > 0 && (
-                                <div className="mb-4">
-                                    <h5 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
-                                        Relevant Coursework
-                                    </h5>
-                                    <div className="flex flex-wrap gap-1">
-                                        {education.coursework.map((course, index) => (
-                                            <span
-                                                key={index}
-                                                className="inline-block px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded"
-                                            >
-                                                {course}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
                             {education.achievements && education.achievements.length > 0 && (
                                 <div>
                                     <h5 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
