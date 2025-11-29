@@ -8,6 +8,7 @@ import {
     FaHtml5,
     FaCss3Alt,
     FaJsSquare,
+    FaLinux
     
 } from "react-icons/fa"
 import { 
@@ -190,13 +191,21 @@ const technologies: Technology[] = [
         url: "https://aws.amazon.com",
         description: "Cloud computing services"
     },
-    {
+    {   
         id: "20",
         name: "Vercel",
         category: "DevOps",
         icon: SiVercel,
         url: "https://vercel.com",
         description: "Platform for frontend frameworks and static sites"
+    },
+        {
+        id: "21",
+        name: "Linux",
+        category: "DevOps",
+        icon: FaLinux,
+        url: "https://linux.org",
+        description: "Open source operating system"
     }
 ]
 
