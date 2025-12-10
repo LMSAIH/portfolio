@@ -27,7 +27,7 @@ const volunteerExperiences: VolunteerExperience[] = [
         role: "Head of IT",
         logo: "/company-logos/french-club.png",
         startDate: "Sep 2024",
-        endDate: "Present",
+        endDate: "Dec 2025",
         description: "Responsible for the development and maintenance of the Langara French Club's website and internal tools. Collaborating with club members to enhance existing tools and creating new ones to improve the club's operations."
     },
     {
