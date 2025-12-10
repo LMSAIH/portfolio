@@ -27,7 +27,7 @@ const workExperiences: WorkExperience[] = [
         position: "Engagement Kiosk Assistant",
         logo: "/company-logos/langara-college.png",
         startDate: "May 2025",
-        endDate: "Present",
+        endDate: "Dec 2025",
         description: "In my role as an Engagement Kiosk Assistant, I enhance the student experience by adding new functionalities and organizing existing data collection scripts and reporting processes using Excel. I actively engage with students and staff daily to provide comprehensive information about college services, events, and resources. Additionally, I manage the engagement kiosk operations, ensuring it remains well-stocked, organized, and accessible to serve the diverse needs of the Langara College community.",
     },
     {
