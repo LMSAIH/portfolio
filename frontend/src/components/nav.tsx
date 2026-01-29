@@ -4,13 +4,13 @@ import { FaLinkedinIn, FaGithub, FaEnvelope } from "react-icons/fa";
 
 const Navigation: React.FC = () => {
     return (
-        <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 h-24">
-            <div className="backdrop-blur-md bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 rounded-full px-4 py-2 shadow-2xl shadow-black/5 dark:shadow-black/20">
-                <div className="flex items-center gap-4">
-                    {/* Social Icons */}
+        <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+            <div className="backdrop-blur-xl bg-background/70 border border-border/50 rounded-full px-2 py-2 shadow-lg shadow-black/5 dark:shadow-black/20">
+                <div className="flex items-center gap-1">
                     <Button 
                         variant="ghost" 
                         size="icon"
+                        className="h-9 w-9 rounded-full"
                         asChild
                     >
                         <a 
@@ -26,6 +26,7 @@ const Navigation: React.FC = () => {
                     <Button 
                         variant="ghost" 
                         size="icon"
+                        className="h-9 w-9 rounded-full"
                         asChild
                     >
                         <a 
@@ -41,6 +42,7 @@ const Navigation: React.FC = () => {
                     <Button 
                         variant="ghost" 
                         size="icon"
+                        className="h-9 w-9 rounded-full"
                         asChild
                     >
                         <a 
@@ -51,13 +53,9 @@ const Navigation: React.FC = () => {
                         </a>
                     </Button>
                     
-                    {/* Separator */}
-                    <div className="w-px h-6 bg-black/30 dark:bg-white/20 mx-2"></div>
+                    <div className="w-px h-5 bg-border mx-1" />
                     
-                    {/* Theme Toggle */}
-                    <div>
-                        <ModeToggle />
-                    </div>
+                    <ModeToggle />
                 </div>
             </div>
         </nav>
