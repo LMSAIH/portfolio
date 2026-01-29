@@ -158,7 +158,7 @@ function Deployments() {
 
     return (
         <div className="w-full">
-            <DataTable columns={columns} data={data} title="Showcase" />
+            <DataTable columns={columns} data={data} title="" />
         </div>
     )
 }
