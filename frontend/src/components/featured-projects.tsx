@@ -113,7 +113,7 @@ const projectsData: FeaturedProject[] = [
 export function FeaturedProjects() {
   return (
     <div className="w-full">
-      <DataTable columns={columns} data={projectsData} title="Featured Projects" />
+      <DataTable columns={columns} data={projectsData} title="" />
     </div>
   )
 }
