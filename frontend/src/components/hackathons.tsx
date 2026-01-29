@@ -1,3 +1,5 @@
+import { useRef } from "react"
+import { motion, useInView } from "motion/react"
 import { ExternalLink } from "lucide-react"
 
 type Hackathon = {
@@ -5,64 +7,71 @@ type Hackathon = {
     name: string
     award: string
     devpostUrl: string
-
 }
 
 const hackathons: Hackathon[] = [
     {
         id: "1",
-        name: "StormHacks 2025",
-        award: "Winner - Finalist, Best Design, United Nations Sustainable Development Goals Enactus Challenge",
-        devpostUrl: "https://devpost.com/software/mapd-urban-development-intelligence",
+        name: "NWHacks 2026",
+        award: "Shortlisted - Block (Best Real-World Ready AI Product) ",
+        devpostUrl: "https://devpost.com/software/omni-uvw87a?_gl=1*1osu1z0*_gcl_au*OTE4OTI4NDI2LjE3Njg1OTY0Nzg.*_ga*MzM2NDYyNzk3LjE3Njg1OTY0Nzg.*_ga_0YHJK3Y10M*czE3Njk1ODYyMjckbzEzJGcxJHQxNzY5NTg2NTIzJGo0MyRsMCRoMA..",
     },
     {
         id: "2",
-        name: "Project0",
-        award: "Winner - 1st Place",
-        devpostUrl: "https://devpost.com/software/devmatrix",
+        name: "StormHacks 2025",
+        award: "Finalist, Best Design, UN SDG Enactus Challenge",
+        devpostUrl: "https://devpost.com/software/mapd-urban-development-intelligence",
     },
     {
         id: "3",
+        name: "Project0",
+        award: "1st Place Overall",
+        devpostUrl: "https://devpost.com/software/devmatrix",
+    },
+    {
+        id: "4",
         name: "LangaraHacks 2024",
-        award: "Winner - Raffle Prizes",
+        award: "Raffle Prize Winner",
         devpostUrl: "https://devpost.com/software/hacksbricsteam",
     },
-
 ]
+
+const HackathonCard = ({ hackathon, index }: { hackathon: Hackathon; index: number }) => {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true, margin: "-50px" })
+
+    return (
+        <motion.a
+            ref={ref}
+            href={hackathon.devpostUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+            animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.4, 0.25, 1] }}
+            className="group block p-4 rounded-xl bg-secondary/90 hover:bg-secondary/60 transition-all duration-200"
+        >
+            <div className="flex items-start justify-between">
+                <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-sm mb-1 group-hover:text-ring transition-colors">
+                        {hackathon.name}
+                    </h4>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                        {hackathon.award}
+                    </p>
+                </div>
+                <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0 ml-3" />
+            </div>
+        </motion.a>
+    )
+}
 
 export const Hackathons = () => {
     return (
-        <div>
-            <div className="flex items-center gap-2 mb-6">
-                <h3 className="text-lg font-semibold">Hackathons & Awards</h3>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-                {hackathons.map((hackathon) => (
-                    <a
-                        key={hackathon.id}
-                        href={hackathon.devpostUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group block p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-200 hover:shadow-md dark:hover:shadow-lg"
-                    >
-                        <div className="flex items-start justify-between">
-                            <div className="flex-1 min-w-0">
-                                
-                                <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                    {hackathon.name}
-                                </h4>
-                                
-                                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                     {hackathon.award}
-                                </p>
-                            </div>
-                            
-                            <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors flex-shrink-0 ml-3" />
-                        </div>
-                    </a>
-                ))}
-            </div>
+        <div className="grid gap-3 md:grid-cols-2">
+            {hackathons.map((hackathon, index) => (
+                <HackathonCard key={hackathon.id} hackathon={hackathon} index={index} />
+            ))}
         </div>
     )
 }
