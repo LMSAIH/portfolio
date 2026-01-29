@@ -70,14 +70,14 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <h3 className="text-lg font-semibold">{title}</h3>
+      <div className="flex items-center justify-between mb-4">
+        {title && <h3 className="text-lg font-medium">{title}</h3>}
 
         {/* Status Filter */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Filter by Status <ChevronDown className="ml-2 h-4 w-4" />
+            <Button variant="ghost" size="sm" className="text-muted-foreground">
+              Filter <ChevronDown className="ml-1 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -113,9 +113,9 @@ export function DataTable<TData, TValue>({
         </DropdownMenu>
       </div>
 
-      <div className="overflow-hidden rounded-md border">
+      <div className="overflow-hidden rounded-2xl border border-border/50">
         <Table>
-          <TableHeader >
+          <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
