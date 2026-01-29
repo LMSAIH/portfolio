@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
+import { experienceTypography } from "./Typographies"
 
 type VolunteerExperience = {
     id: string
@@ -24,7 +25,7 @@ const volunteerExperiences: VolunteerExperience[] = [
     {
         id: "2",
         organization: "Langara French Club",
-        role: "Head of IT",
+        role: "Vicepresident",
         logo: "/company-logos/french-club.png",
         startDate: "Sep 2024",
         endDate: "Dec 2025",
@@ -52,45 +53,41 @@ const VolunteerExperienceItem = ({ experience }: { experience: VolunteerExperien
     return (
         <div className="relative">
             <div
-                className="flex items-start gap-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 -m-3 transition-colors duration-200"
+                className="flex items-start gap-2 cursor-pointer hover:bg-secondary/50 rounded-xl p-3 -m-3 transition-colors duration-200"
                 onClick={toggleExpanded}
             >
                 {/* Organization Logo/Initials */}
                 <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
-                        <img src={experience.logo} alt={experience.organization} className="w-full h-full rounded-full" />
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-secondary">
+                        <img src={experience.logo} alt={experience.organization} className="w-full h-full object-cover" />
                     </div>
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between">
-                        <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 dark:text-gray-100">
+                    <div className="flex justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                            <h4 className={experienceTypography.title}>
                                 {experience.role}
                             </h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className={experienceTypography.subtitle}>
                                 {experience.organization}
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                                {experience.startDate} - {experience.endDate}
                             </p>
                         </div>
 
-                        {/* Expand/Collapse Icon */}
-                        <div className="flex-shrink-0 ml-4">
-                            <div className={`transition-transform duration-300 ease-in-out ${isExpanded ? 'rotate-0' : '-rotate-90'}`}>
-                                <ChevronDown className="h-4 w-4 text-gray-400" />
-                            </div>
-                        </div>
+                        {/* Date on right */}
+                        <span className={experienceTypography.date}>
+                            {experience.startDate} – {experience.endDate}
+                        </span>
+
                     </div>
 
                     <div
                         className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                             }`}
                     >
-                        <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+                        <div className="mt-3 pt-3 border-t border-border">
+                            <p className={`${experienceTypography.description} whitespace-pre-wrap`}>
                                 {experience.description}
                             </p>
                         </div>
@@ -104,16 +101,10 @@ const VolunteerExperienceItem = ({ experience }: { experience: VolunteerExperien
 
 export const VolunteerHistory = () => {
     return (
-        <div>
-            <div className="flex items-center gap-2 mb-6">
-                <h3 className="text-lg font-semibold">Volunteering Experience</h3>
-            </div>
-
-            <div className="space-y-4">
-                {volunteerExperiences.map((experience) => (
-                    <VolunteerExperienceItem key={experience.id} experience={experience} />
-                ))}
-            </div>
+        <div className="space-y-2">
+            {volunteerExperiences.map((experience) => (
+                <VolunteerExperienceItem key={experience.id} experience={experience} />
+            ))}
         </div>
     )
 }
