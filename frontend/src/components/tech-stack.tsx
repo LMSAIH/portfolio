@@ -23,7 +23,7 @@ import {
     SiSupabase,
     SiFirebase,
     SiRedis,
-    
+    SiCloudflare
 } from "react-icons/si"
 
 type Technology = {
@@ -199,8 +199,16 @@ const technologies: Technology[] = [
         url: "https://vercel.com",
         description: "Platform for frontend frameworks and static sites"
     },
-        {
+    {
         id: "21",
+        name: "Cloudflare",
+        category: "DevOps",
+        icon: SiCloudflare,
+        url: "https://cloudflare.com",
+        description: "Web infrastructure and security services"
+    },
+    {
+        id: "22",
         name: "Linux",
         category: "DevOps",
         icon: FaLinux,
@@ -215,36 +223,30 @@ export const TechStack = () => {
     const categories = ["Frontend", "Backend", "DevOps"]
 
     return (
-        <div>
-            <div>
-                
-                <div className="grid gap-6 md:grid-cols-3">
-                    {categories.map((category) => (
-                        <div key={category}>
-                            <h5 className="font-medium text-sm text-gray-900 dark:text-gray-100 mb-3">
-                                {category}
-                            </h5>
-                            <ul className="space-y-2">
-                                {technologies
-                                    .filter(tech => tech.category === category)
-                                    .map(tech => (
-                                        <li key={tech.id} className="text-sm text-gray-600 dark:text-gray-400">
-                                            <a 
-                                                href={tech.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-2"
-                                            >
-                                                <tech.icon className="h-4 w-4" />
-                                                {tech.name}
-                                            </a>
-                                        </li>
-                                    ))}
-                            </ul>
-                        </div>
-                    ))}
+        <div className="grid gap-8 md:grid-cols-3">
+            {categories.map((category) => (
+                <div key={category}>
+                    <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                        {category}
+                    </h5>
+                    <div className="flex flex-wrap gap-2">
+                        {technologies
+                            .filter(tech => tech.category === category)
+                            .map(tech => (
+                                <a 
+                                    key={tech.id}
+                                    href={tech.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-sm text-muted-foreground bg-secondary/50 hover:bg-secondary hover:text-foreground rounded-lg transition-colors duration-200"
+                                >
+                                    <tech.icon className="h-3.5 w-3.5" />
+                                    {tech.name}
+                                </a>
+                            ))}
+                    </div>
                 </div>
-            </div>
+            ))}
         </div>
     )
 }
