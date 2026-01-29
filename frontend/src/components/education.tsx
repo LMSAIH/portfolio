@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
+import { experienceTypography } from "./Typographies"
 
 type Education = {
     id: string
@@ -41,20 +42,20 @@ const EducationItem = ({ education }: { education: Education }) => {
     return (
         <div className="relative">
             <div
-                className="flex items-start gap-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg p-3 -m-3 transition-colors duration-200"
+                className="flex items-start gap-3 cursor-pointer hover:bg-secondary/50 rounded-xl p-3 -m-3 transition-colors duration-200"
                 onClick={toggleExpanded}
             >
                 {/* Institution Logo */}
                 <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-secondary">
                         {education.logo ? (
                             <img 
                                 src={education.logo} 
                                 alt={education.institution} 
-                                className="w-full h-full rounded-full object-cover" 
+                                className="w-full h-full object-cover" 
                             />
                         ) : (
-                            <div className="w-full h-full rounded-full bg-blue-500 flex items-center justify-center">
+                            <div className="w-full h-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">
                                 {education.institution.charAt(0)}
                             </div>
                         )}
@@ -63,36 +64,23 @@ const EducationItem = ({ education }: { education: Education }) => {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between">
-                        <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 dark:text-gray-100">
+                    <div className="flex justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                            <h4 className={experienceTypography.title}>
                                 {education.degree}
                                 {education.field && ` in ${education.field}`}
                             </h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className={experienceTypography.subtitle}>
                                 {education.institution}
+                                {education.gpa && ` · GPA: ${education.gpa}`}
                             </p>
-                            <div className="flex items-center gap-2 mt-1">
-                                <p className="text-xs text-gray-500 dark:text-gray-500">
-                                    {education.startDate} - {education.endDate}
-                                </p>
-                                {education.gpa && (
-                                    <>
-                                        <span className="text-xs text-gray-300 dark:text-gray-600">•</span>
-                                        <p className="text-xs text-gray-500 dark:text-gray-500">
-                                            GPA: {education.gpa}
-                                        </p>
-                                    </>
-                                )}
-                            </div>
                         </div>
 
-                        {/* Expand/Collapse Icon */}
-                        <div className="flex-shrink-0 ml-4">
-                            <div className={`transition-transform duration-300 ease-in-out ${isExpanded ? 'rotate-0' : '-rotate-90'}`}>
-                                <ChevronDown className="h-4 w-4 text-gray-400" />
-                            </div>
-                        </div>
+                        {/* Date on right */}
+                        <span className={experienceTypography.date}>
+                            {education.startDate} – {education.endDate}
+                        </span>
+                        
                     </div>
 
                     <div
@@ -100,23 +88,25 @@ const EducationItem = ({ education }: { education: Education }) => {
                             isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                         }`}
                     >
-                        <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                                {education.description}
-                            </p>
+                        <div className="mt-3 pt-3 border-t border-border">
+                            {education.description && (
+                                <p className={`${experienceTypography.description} mb-4`}>
+                                    {education.description}
+                                </p>
+                            )}
 
                             {education.achievements && education.achievements.length > 0 && (
                                 <div>
-                                    <h5 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
-                                        Achievements & Recognition
+                                    <h5 className="text-xs md:text-sm font-medium mb-2">
+                                        Recognition
                                     </h5>
                                     <ul className="space-y-1">
                                         {education.achievements.map((achievement, index) => (
                                             <li 
                                                 key={index}
-                                                className="text-sm text-gray-600 dark:text-gray-300 flex items-start"
+                                                className={`${experienceTypography.description} flex items-start`}
                                             >
-                                                <span className="text-gray-400 mr-2">•</span>
+                                                <span className="text-muted-foreground/50 mr-2">•</span>
                                                 {achievement}
                                             </li>
                                         ))}
@@ -133,16 +123,10 @@ const EducationItem = ({ education }: { education: Education }) => {
 
 export const Education = () => {
     return (
-        <div>
-            <div className="flex items-center gap-2 mb-6">
-                <h3 className="text-lg font-semibold">Education</h3>
-            </div>
-
-            <div className="space-y-4">
-                {educationHistory.map((education) => (
-                    <EducationItem key={education.id} education={education} />
-                ))}
-            </div>
+        <div className="space-y-2">
+            {educationHistory.map((education) => (
+                <EducationItem key={education.id} education={education} />
+            ))}
         </div>
     )
 }
