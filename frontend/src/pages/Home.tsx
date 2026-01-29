@@ -1,93 +1,192 @@
-import { lazy, Suspense } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { lazy, Suspense, useRef, useState, useEffect } from "react";
+import { motion, useInView } from "motion/react";
 import { Skeleton } from "@/components/ui/skeleton";
-import GitHubCalendar from 'react-github-calendar';
+import { Subheader } from "@/components/Typographies";
+import { AnimatedSection } from "@/components/Animations";
 
 // Lazy-loaded components (loaded when needed)
-const Deployments = lazy(() => import("@/components/deployments").then(mod => ({ default: mod.Deployments })));
-const FeaturedProjects = lazy(() => import("@/components/featured-projects").then(mod => ({ default: mod.FeaturedProjects })));
-const GitHubCommits = lazy(() => import("@/components/github-commits").then(mod => ({ default: mod.GitHubCommits })));
+const Products = lazy(() => import("@/components/products").then(mod => ({ default: mod.Products })));
 const WorkHistory = lazy(() => import("@/components/work-history").then(mod => ({ default: mod.WorkHistory })));
 const VolunteerHistory = lazy(() => import("@/components/volunteer-history").then(mod => ({ default: mod.VolunteerHistory })));
 const Hackathons = lazy(() => import("@/components/hackathons").then(mod => ({ default: mod.Hackathons })));
-const TechStack = lazy(() => import("@/components/tech-stack").then(mod => ({ default: mod.TechStack })));
 const Education = lazy(() => import("@/components/education").then(mod => ({ default: mod.Education })));
+const TechStack = lazy(() => import("@/components/tech-stack").then(mod => ({ default: mod.TechStack })));
+
+const SectionSkeleton = () => (
+    <div className="py-8"><Skeleton className="h-48 w-full rounded-2xl" /></div>
+);
+
+const sections = [
+    { id: "about", label: "About" },
+    { id: "education", label: "Education" },
+    { id: "work", label: "Work" },
+    { id: "volunteering", label: "Volunteering" },
+    { id: "tech-stack", label: "Tech Stack" },
+    { id: "hackathons", label: "Hackathons" },
+    { id: "products", label: "Products" },
+];
+
+const Sidebar = () => {
+    const [activeSection, setActiveSection] = useState("about");
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const viewportMiddle = window.scrollY + window.innerHeight / 3;
+
+            let currentSection = sections[0].id;
+            
+            for (const { id } of sections) {
+                const element = document.getElementById(id);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    const elementTop = rect.top + window.scrollY;
+                    
+                    if (elementTop <= viewportMiddle) {
+                        currentSection = id;
+                    }
+                }
+            }
+            
+            setActiveSection(currentSection);
+        };
+
+        // Small delay to ensure DOM is ready
+        setTimeout(handleScroll, 100);
+        
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    };
+
+    return (
+        <motion.nav
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="fixed left-8 top-1/2 -translate-y-1/2 hidden xl:block z-50"
+        >
+            <div className="space-y-1">
+                {sections.map(({ id, label }) => (
+                    <button
+                        key={id}
+                        onClick={() => scrollToSection(id)}
+                        className="group flex items-center gap-3 py-2 transition-all duration-300"
+                    >
+                        <div
+                            className={`h-px transition-all duration-300 ${
+                                activeSection === id
+                                    ? "w-8 bg-foreground"
+                                    : "w-4 bg-muted-foreground/30 group-hover:w-6 group-hover:bg-muted-foreground"
+                            }`}
+                        />
+                        <span
+                            className={`text-xs transition-all duration-300 ${
+                                activeSection === id
+                                    ? "text-foreground font-medium"
+                                    : "text-muted-foreground/50 group-hover:text-muted-foreground"
+                            }`}
+                        >
+                            {label}
+                        </span>
+                    </button>
+                ))}
+            </div>
+        </motion.nav>
+    );
+};
 
 const Home: React.FC = () => {
     return (
-        <div className="py-24 lg:py-32 px-4 mx-auto max-w-7xl">
-            <Tabs defaultValue="portfolio" className="w-full">
+        <div className="min-h-screen">
+            <Sidebar />
+            
+            {/* Hero Section */}
+            <motion.section 
+                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+                className="pt-28 pb-8 px-6 max-w-4xl mx-auto"
+            >
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-3">
+                    Hi, I'm Axel
+                </h1>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
+                    Fullstack developer. Hackathon winner. Open source contributor.
+                </p>
+            </motion.section>
 
-                <div className="mb-10 flex justify-center lg:justify-start">
-                    <TabsList className="inline-flex h-9 items-center justify-center lg:justify-left rounded-lg  text-muted-foreground flex-wrap gap-y-2">
-                        <TabsTrigger value="portfolio" className="px-3 lg:px-4 py-1.5 text-sm">Portfolio</TabsTrigger>
-                        <TabsTrigger value="projects" className="px-3 lg:px-4 py-1.5 text-sm">Projects</TabsTrigger>
-                        <TabsTrigger value="contributions" className="px-3 lg:px-4 py-1.5 text-sm">Contributions</TabsTrigger>
-                    </TabsList>
+            {/* About */}
+            <AnimatedSection id="about" className="py-6 px-6 max-w-4xl mx-auto" delay={0.1}>
+                <Subheader>About</Subheader>
+                <div className="space-y-3 text-base leading-relaxed">
+                    <p>
+                        I build purposeful applications and love shipping products that make a difference. 
+                        I work with non-profits and regularly contribute to open source—because shaping a better world is human.
+                    </p>
+                    <p className="text-muted-foreground">
+                        If you're interested in any of my work, almost everything is publicly available on my{" "}
+                        <a href="https://github.com/LMSAIH" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4 hover:text-ring transition-colors">
+                            GitHub
+                        </a>. Feel free to reach out via email.
+                    </p>
                 </div>
+            </AnimatedSection>
 
-                <TabsContent value="portfolio" className="space-y-8">
-                    <div className="text-left w-full lg:w-1/2">
-                        <h1 className="mb-4">
-                            I am <span className="font-medium">Axel Velasquez</span>, a fullstack developer who loves building, testing and shipping applications.
-                        </h1>
+            
+            {/* Products */}
+            <AnimatedSection id="products" className="py-12 px-6 max-w-5xl mx-auto">
+                <Subheader>Products</Subheader>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <Products />
+                </Suspense>
+            </AnimatedSection>
 
-                        <p className="mb-4">
-                            I enjoy working with non-profits and regularly contribute to open source projects. Helping to shape a better world within your field is not only rewarding, it's human.
-                        </p>
+            {/* Education */}
+            <AnimatedSection id="education" className="py-6 px-6 max-w-4xl mx-auto">
+                <Subheader>Education</Subheader>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <Education />
+                </Suspense>
+            </AnimatedSection>
 
-                        <p className="mb-4">
-                            If you are interested in any of my work, almost everything is publicly available on my <a href="https://github.com/LMSAIH" target="_blank" rel="noopener noreferrer" className="font-medium underline">GitHub</a>. If it isn't but you'd like to inquire about it, feel free to reach out to me via email.
-                        </p>
-                    </div>
+            {/* Work Experience */}
+            <AnimatedSection id="work" className="py-6 px-6 max-w-4xl mx-auto">
+                <Subheader>Work Experience</Subheader>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <WorkHistory />
+                </Suspense>
+            </AnimatedSection>
 
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <Deployments />
-                    </Suspense>
+            {/* Volunteering */}
+            <AnimatedSection id="volunteering" className="py-6 px-6 max-w-4xl mx-auto">
+                <Subheader>Volunteering</Subheader>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <VolunteerHistory />
+                </Suspense>
+            </AnimatedSection>
 
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
-                        <Education />
-                    </Suspense>
+             <AnimatedSection id="tech-stack" className="py-6 px-6 max-w-4xl mx-auto">
+                <Subheader>Tech Stack</Subheader>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <TechStack />
+                </Suspense>
+            </AnimatedSection>
 
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <WorkHistory />
-                    </Suspense>
+            {/* Hackathons */}
+            <AnimatedSection id="hackathons" className="py-6 px-6 max-w-4xl mx-auto">
+                <Subheader>Hackathons</Subheader>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <Hackathons />
+                </Suspense>
+            </AnimatedSection>
 
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <VolunteerHistory />
-                    </Suspense>
-
-                    <h3 className="text-lg font-semibold">Tech Stack</h3>
-
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
-                        <TechStack />
-                    </Suspense>
-
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
-                        <Hackathons />
-                    </Suspense>
-
-                    <h3 className="text-lg font-semibold">Github Contribution Graph</h3>
-
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-32 w-full" /></div>}>
-                        <GitHubCalendar username="LMSAIH" />
-                    </Suspense>
-
-                </TabsContent>
-
-                <TabsContent value="projects" className="space-y-8">
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <FeaturedProjects />
-                    </Suspense>
-                </TabsContent>
-
-                <TabsContent value="contributions" className="space-y-8">
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <GitHubCommits />
-                    </Suspense>
-                </TabsContent>
-
-            </Tabs>
+            
         </div>
     );
 }
