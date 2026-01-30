@@ -24,7 +24,7 @@ const volunteerExperiences: VolunteerExperience[] = [
     {
         id: "2",
         organization: "Langara French Club",
-        role: "Vicepresident",
+        role: "Vice President",
         logo: "/company-logos/french-club.png",
         startDate: "Sep 2024",
         endDate: "Dec 2025",
