@@ -33,6 +33,7 @@ type Technology = {
     icon: React.ComponentType<{ className?: string }>
     url: string
     description: string
+    color: string
 }
 
 const technologies: Technology[] = [
@@ -43,7 +44,8 @@ const technologies: Technology[] = [
         category: "Frontend",
         icon: FaHtml5,
         url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-        description: "Markup language for creating web pages"
+        description: "Markup language for creating web pages",
+        color: "#E34F26"
     },
     {
         id: "2",
@@ -51,7 +53,8 @@ const technologies: Technology[] = [
         category: "Frontend",
         icon: FaCss3Alt,
         url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-        description: "Style sheet language for styling web pages"
+        description: "Style sheet language for styling web pages",
+        color: "#1572B6"
     },
     {
         id: "3",
@@ -59,7 +62,8 @@ const technologies: Technology[] = [
         category: "Frontend",
         icon: FaJsSquare,
         url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-        description: "Programming language for web development"
+        description: "Programming language for web development",
+        color: "#F7DF1E"
     },
     {
         id: "4",
@@ -67,7 +71,8 @@ const technologies: Technology[] = [
         category: "Frontend",
         icon: SiTypescript,
         url: "https://www.typescriptlang.org",
-        description: "Typed superset of JavaScript"
+        description: "Typed superset of JavaScript",
+        color: "#3178C6"
     },
     {
         id: "5",
@@ -75,7 +80,8 @@ const technologies: Technology[] = [
         category: "Frontend",
         icon: FaReact,
         url: "https://reactjs.org",
-        description: "JavaScript library for building user interfaces"
+        description: "JavaScript library for building user interfaces",
+        color: "#61DAFB"
     },
     {
         id: "6",
@@ -83,7 +89,8 @@ const technologies: Technology[] = [
         category: "Frontend",
         icon: SiNextdotjs,
         url: "https://nextjs.org",
-        description: "React framework for production"
+        description: "React framework for production",
+        color: "#000000"
     },
     {
         id: "7",
@@ -91,7 +98,8 @@ const technologies: Technology[] = [
         category: "Frontend",
         icon: SiTailwindcss,
         url: "https://tailwindcss.com",
-        description: "Utility-first CSS framework"
+        description: "Utility-first CSS framework",
+        color: "#06B6D4"
     },
     {
         id: "8",
@@ -99,7 +107,8 @@ const technologies: Technology[] = [
         category: "Frontend",
         icon: SiVite,
         url: "https://vitejs.dev",
-        description: "Fast build tool and development server"
+        description: "Fast build tool and development server",
+        color: "#646CFF"
     },
     // Backend
     {
@@ -108,7 +117,8 @@ const technologies: Technology[] = [
         category: "Backend",
         icon: FaNodeJs,
         url: "https://nodejs.org",
-        description: "JavaScript runtime built on Chrome's V8"
+        description: "JavaScript runtime built on Chrome's V8",
+        color: "#339933"
     },
     {
         id: "10",
@@ -116,7 +126,8 @@ const technologies: Technology[] = [
         category: "Backend",
         icon: FaPython,
         url: "https://python.org",
-        description: "High-level programming language"
+        description: "High-level programming language",
+        color: "#3776AB"
     },
     {
         id: "11",
@@ -124,7 +135,8 @@ const technologies: Technology[] = [
         category: "Backend",
         icon: SiFastapi,
         url: "https://fastapi.tiangolo.com",
-        description: "Modern Python web framework for APIs"
+        description: "Modern Python web framework for APIs",
+        color: "#009688"
     },
     {
         id: "12",
@@ -132,7 +144,8 @@ const technologies: Technology[] = [
         category: "Backend",
         icon: SiPostgresql,
         url: "https://postgresql.org",
-        description: "Advanced open source relational database"
+        description: "Advanced open source relational database",
+        color: "#4169E1"
     },
     {
         id: "13",
@@ -140,7 +153,8 @@ const technologies: Technology[] = [
         category: "Backend",
         icon: SiMongodb,
         url: "https://mongodb.com",
-        description: "Document-based NoSQL database"
+        description: "Document-based NoSQL database",
+        color: "#47A248"
     },
     {
         id: "14",
@@ -148,7 +162,8 @@ const technologies: Technology[] = [
         category: "Backend",
         icon: SiSupabase,
         url: "https://supabase.com",
-        description: "Open source Firebase alternative"
+        description: "Open source Firebase alternative",
+        color: "#3ECF8E"
     },
     {
         id: "15",
@@ -156,7 +171,8 @@ const technologies: Technology[] = [
         category: "Backend",
         icon: SiFirebase,
         url: "https://firebase.google.com",
-        description: "Google's mobile and web development platform"
+        description: "Google's mobile and web development platform",
+        color: "#FFCA28"
     },
     {
         id: "16",
@@ -164,7 +180,8 @@ const technologies: Technology[] = [
         category: "Backend",
         icon: SiRedis,
         url: "https://redis.io",
-        description: "In-memory data structure store"
+        description: "In-memory data structure store",
+        color: "#DC382D"
     },
     // Tools & DevOps
     {
@@ -173,7 +190,8 @@ const technologies: Technology[] = [
         category: "DevOps",
         icon: FaDocker,
         url: "https://docker.com",
-        description: "Platform for developing, shipping, and running applications"
+        description: "Platform for developing, shipping, and running applications",
+        color: "#2496ED"
     },
     {
         id: "18",
@@ -181,7 +199,8 @@ const technologies: Technology[] = [
         category: "DevOps",
         icon: FaGitAlt,
         url: "https://git-scm.com",
-        description: "Distributed version control system"
+        description: "Distributed version control system",
+        color: "#F05032"
     },
     {
         id: "19",
@@ -189,7 +208,8 @@ const technologies: Technology[] = [
         category: "DevOps",
         icon: FaAws,
         url: "https://aws.amazon.com",
-        description: "Cloud computing services"
+        description: "Cloud computing services",
+        color: "#FF9900"
     },
     {   
         id: "20",
@@ -197,7 +217,8 @@ const technologies: Technology[] = [
         category: "DevOps",
         icon: SiVercel,
         url: "https://vercel.com",
-        description: "Platform for frontend frameworks and static sites"
+        description: "Platform for frontend frameworks and static sites",
+        color: "#000000"
     },
     {
         id: "21",
@@ -205,7 +226,8 @@ const technologies: Technology[] = [
         category: "DevOps",
         icon: SiCloudflare,
         url: "https://cloudflare.com",
-        description: "Web infrastructure and security services"
+        description: "Web infrastructure and security services",
+        color: "#F38020"
     },
     {
         id: "22",
@@ -213,7 +235,8 @@ const technologies: Technology[] = [
         category: "DevOps",
         icon: FaLinux,
         url: "https://linux.org",
-        description: "Open source operating system"
+        description: "Open source operating system",
+        color: "#FCC624"
     }
 ]
 
@@ -238,10 +261,13 @@ export const TechStack = () => {
                                     href={tech.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-sm text-muted-foreground bg-secondary/50 hover:bg-secondary hover:text-foreground rounded-lg transition-colors duration-200"
+                                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-sm bg-secondary/50 hover:bg-secondary rounded-lg transition-colors duration-200 group"
+                                    style={{
+                                        color: tech.color
+                                    }}
                                 >
-                                    <tech.icon className="h-3.5 w-3.5" />
-                                    {tech.name}
+                                    <tech.icon className={`h-3.5 w-3.5 transition-transform duration-200 group-hover:scale-110 text-[${tech.color}]`}  />
+                                    <span className="text-foreground group-hover:text-foreground">{tech.name}</span>
                                 </a>
                             ))}
                     </div>
