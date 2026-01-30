@@ -1,8 +1,9 @@
-import { lazy, Suspense, useRef, useState, useEffect } from "react";
-import { motion, useInView } from "motion/react";
+import { lazy, Suspense, useState, useEffect } from "react";
+import { motion } from "motion/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Subheader } from "@/components/Typographies";
 import { AnimatedSection } from "@/components/Animations";
+import { HeroDescription } from "@/components/hero-links";
 
 // Lazy-loaded components (loaded when needed)
 const Products = lazy(() => import("@/components/products").then(mod => ({ default: mod.Products })));
@@ -18,12 +19,13 @@ const SectionSkeleton = () => (
 
 const sections = [
     { id: "about", label: "About" },
+    { id: "products", label: "Products" },
     { id: "education", label: "Education" },
     { id: "work", label: "Work" },
     { id: "volunteering", label: "Volunteering" },
     { id: "tech-stack", label: "Tech Stack" },
     { id: "hackathons", label: "Hackathons" },
-    { id: "products", label: "Products" },
+    
 ];
 
 const Sidebar = () => {
@@ -116,9 +118,7 @@ const Home: React.FC = () => {
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-3">
                     Hi, I'm Axel
                 </h1>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                    Fullstack developer. Hackathon winner. Open source contributor.
-                </p>
+                <HeroDescription />
             </motion.section>
 
             {/* About */}
@@ -140,7 +140,7 @@ const Home: React.FC = () => {
 
             
             {/* Products */}
-            <AnimatedSection id="products" className="py-12 px-6 max-w-5xl mx-auto">
+            <AnimatedSection id="products" className="py-6 px-6 max-w-4xl mx-auto">
                 <Subheader>Products</Subheader>
                 <Suspense fallback={<SectionSkeleton />}>
                     <Products />
