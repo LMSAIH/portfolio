@@ -25,7 +25,7 @@ const sections = [
     { id: "volunteering", label: "Volunteering" },
     { id: "tech-stack", label: "Tech Stack" },
     { id: "hackathons", label: "Hackathons" },
-    
+
 ];
 
 const Sidebar = () => {
@@ -36,25 +36,25 @@ const Sidebar = () => {
             const viewportMiddle = window.scrollY + window.innerHeight / 3;
 
             let currentSection = sections[0].id;
-            
+
             for (const { id } of sections) {
                 const element = document.getElementById(id);
                 if (element) {
                     const rect = element.getBoundingClientRect();
                     const elementTop = rect.top + window.scrollY;
-                    
+
                     if (elementTop <= viewportMiddle) {
                         currentSection = id;
                     }
                 }
             }
-            
+
             setActiveSection(currentSection);
         };
 
         // Small delay to ensure DOM is ready
         setTimeout(handleScroll, 100);
-        
+
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -81,18 +81,16 @@ const Sidebar = () => {
                         className="group flex items-center gap-3 py-2 transition-all duration-300"
                     >
                         <div
-                            className={`h-px transition-all duration-300 ${
-                                activeSection === id
+                            className={`h-px transition-all duration-300 ${activeSection === id
                                     ? "w-8 bg-foreground"
                                     : "w-4 bg-muted-foreground/30 group-hover:w-6 group-hover:bg-muted-foreground"
-                            }`}
+                                }`}
                         />
                         <span
-                            className={`text-xs transition-all duration-300 ${
-                                activeSection === id
+                            className={`text-xs transition-all duration-300 ${activeSection === id
                                     ? "text-foreground font-medium"
                                     : "text-muted-foreground/50 group-hover:text-muted-foreground"
-                            }`}
+                                }`}
                         >
                             {label}
                         </span>
@@ -107,9 +105,9 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen">
             <Sidebar />
-            
+
             {/* Hero Section */}
-            <motion.section 
+            <motion.section
                 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
@@ -124,21 +122,17 @@ const Home: React.FC = () => {
             {/* About */}
             <AnimatedSection id="about" className="py-6 px-6 max-w-4xl mx-auto" delay={0.1}>
                 <Subheader>About</Subheader>
-                <div className="space-y-3 text-base leading-relaxed">
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
                     <p>
-                        I build purposeful applications and love shipping products that make a difference. 
-                        I work with non-profits and regularly contribute to open source—because shaping a better world is human.
+                        I'm a <span className="text-foreground font-bold">full-stack developer</span> based in Vancouver who builds software for fun (check my commit history). I've led <span className="text-foreground font-bold">winning teams</span> at major hackathons, including <a href="https://devpost.com/software/mapd-urban-development-intelligence" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">StormHacks 2025 — Western Canada's largest</a>.
                     </p>
-                    <p className="text-muted-foreground">
-                        If you're interested in any of my work, almost everything is publicly available on my{" "}
-                        <a href="https://github.com/LMSAIH" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-4 hover:text-ring transition-colors">
-                            GitHub
-                        </a>. Feel free to reach out via email.
+                    <p>
+                        My work powers research at <a href="https://langara.ca/applied-research-centre" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">Langara's Applied Research Centre</a> and supports initiatives at the <a href="https://unacvancouver.org/" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">United Nations Association in Canada – Vancouver Branch</a>.
                     </p>
                 </div>
             </AnimatedSection>
 
-            
+
             {/* Products */}
             <AnimatedSection id="products" className="py-6 px-6 max-w-4xl mx-auto">
                 <Subheader>Products</Subheader>
@@ -171,7 +165,7 @@ const Home: React.FC = () => {
                 </Suspense>
             </AnimatedSection>
 
-             <AnimatedSection id="tech-stack" className="py-6 px-6 max-w-4xl mx-auto">
+            <AnimatedSection id="tech-stack" className="py-6 px-6 max-w-4xl mx-auto">
                 <Subheader>Tech Stack</Subheader>
                 <Suspense fallback={<SectionSkeleton />}>
                     <TechStack />
@@ -186,7 +180,7 @@ const Home: React.FC = () => {
                 </Suspense>
             </AnimatedSection>
 
-            
+
         </div>
     );
 }
