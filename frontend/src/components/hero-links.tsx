@@ -152,7 +152,7 @@ const HeroLink = ({ id, children, preview, onClick }: HeroLinkProps) => {
             <HoverCardTrigger asChild>
                 <span 
                     onClick={handleTriggerClick}
-                    className="text-foreground hover:text-primary transition-colors duration-200 cursor-pointer border-b border-dotted border-muted-foreground/40 hover:border-primary pb-0.5"
+                    className="text-foreground/90 hover:text-foreground cursor-pointer transition-all duration-300 relative underline underline-offset-4 decoration-muted-foreground/70 "
                 >
                     {children}
                 </span>
