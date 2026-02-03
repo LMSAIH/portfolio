@@ -11,6 +11,12 @@ type Hackathon = {
 
 const hackathons: Hackathon[] = [
     {
+        id: "5",
+        name: "XHacks",
+        award: "Winner - Best use of SFU Courses API",
+        devpostUrl: "https://devpost.com/software/learn-lm"   
+    },
+    {
         id: "1",
         name: "NWHacks 2026",
         award: "Shortlisted - Block (Best Real-World Ready AI Product) ",
