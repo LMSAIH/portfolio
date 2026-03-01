@@ -127,7 +127,7 @@ const Home: React.FC = () => {
                         I'm a <span className="text-foreground font-bold">full-stack developer</span> based in Vancouver who builds software for fun (check my commit history). I've led <span className="text-foreground font-bold">winning teams</span> at major hackathons, including <a href="https://devpost.com/software/mapd-urban-development-intelligence" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">StormHacks 2025 — Western Canada's largest</a>.
                     </p>
                     <p>
-                        My work powers research at <a href="https://langara.ca/applied-research-centre" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">Langara's Applied Research Centre</a> and supports initiatives at the <a href="https://unacvancouver.org/" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">United Nations Association in Canada – Vancouver Branch</a>.
+                        Currently building @<a href="https://icepanel.io" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">IcePanel YC (S23)</a>, a platform that helps software architects design and document software systems. 
                     </p>
                 </div>
             </AnimatedSection>
