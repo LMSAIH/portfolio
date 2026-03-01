@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { experienceTypography } from "./Typographies"
 import { Badge } from "@/components/ui/badge"
 
@@ -17,6 +17,19 @@ type WorkExperience = {
 }
 
 const workExperiences: WorkExperience[] = [
+    {
+        id: "4",
+        company: "IcePanel",
+        logo: "/company-logos/icepanel_logo.jpg",
+        positions: [
+            {
+                title: "Jr. Software Engineer",
+                startDate: "Feb 2026",
+                endDate: "Present",
+                description: "Contributing to the IcePanel platform to support software architects in designing and documenting software systems."
+            }
+        ]
+    },
     {
         id: "1",
         company: "Langara College Applied Research Centre",
@@ -66,9 +79,10 @@ const workExperiences: WorkExperience[] = [
 
 const WorkExperienceItem = ({ experience }: { experience: WorkExperience }) => {
     const [isExpanded, setIsExpanded] = useState(false)
+    const contentRef = useRef<HTMLDivElement>(null)
     const hasMultiplePositions = experience.positions.length > 1
     const latestPosition = experience.positions[0]
-    const dateRange = hasMultiplePositions 
+    const dateRange = hasMultiplePositions
         ? `${experience.positions[experience.positions.length - 1].startDate} – ${latestPosition.endDate}`
         : `${latestPosition.startDate} – ${latestPosition.endDate}`
 
@@ -107,16 +121,15 @@ const WorkExperienceItem = ({ experience }: { experience: WorkExperience }) => {
                     </div>
 
                     {/* Expanded Content */}
-                    <div 
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                            isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
-                        }`}
+                    <div
+                        style={{ height: isExpanded ? contentRef.current?.scrollHeight ?? 0 : 0, overflow: 'hidden', transition: 'height 0.4s ease, opacity 0.4s ease', opacity: isExpanded ? 1 : 0 }}
                     >
-                        <div className="mt-3 pt-3 border-t border-border space-y-4">
+                        <div ref={contentRef}>
+                            <div className=" pt-3 border-t border-border space-y-4">
                             {experience.positions.map((position, index) => (
                                 <div key={index} className="relative">
-                                    {hasMultiplePositions &&<div className="flex items-start justify-between gap-2 mb-1">
-                                      <span className="text-md font-normal ">{position.title}</span>
+                                    {hasMultiplePositions && <div className="flex items-start justify-between gap-2 mb-1">
+                                        <span className="text-md font-normal ">{position.title}</span>
                                         <span className={experienceTypography.date}>
                                             {position.startDate} – {position.endDate}
                                         </span>
@@ -126,6 +139,7 @@ const WorkExperienceItem = ({ experience }: { experience: WorkExperience }) => {
                                     </p>
                                 </div>
                             ))}
+                        </div>
                         </div>
                     </div>
                 </div>

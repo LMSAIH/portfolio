@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { experienceTypography } from "./Typographies"
 
 type Education = {
@@ -33,6 +33,7 @@ const educationHistory: Education[] = [
 
 const EducationItem = ({ education }: { education: Education }) => {
     const [isExpanded, setIsExpanded] = useState(false)
+    const contentRef = useRef<HTMLDivElement>(null)
 
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded)
@@ -48,10 +49,10 @@ const EducationItem = ({ education }: { education: Education }) => {
                 <div className="flex-shrink-0">
                     <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-secondary">
                         {education.logo ? (
-                            <img 
-                                src={education.logo} 
-                                alt={education.institution} 
-                                className="w-full h-full object-cover" 
+                            <img
+                                src={education.logo}
+                                alt={education.institution}
+                                className="w-full h-full object-cover"
                             />
                         ) : (
                             <div className="w-full h-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">
@@ -62,7 +63,8 @@ const EducationItem = ({ education }: { education: Education }) => {
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0"
+                >
                     <div className="flex justify-between gap-3">
                         <div className="flex-1 min-w-0">
                             <h4 className={experienceTypography.title}>
@@ -79,13 +81,12 @@ const EducationItem = ({ education }: { education: Education }) => {
                         <span className={experienceTypography.date}>
                             {education.startDate} – {education.endDate}
                         </span>
-                        
+
                     </div>
 
                     <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                            isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                        }`}
+                        style={{ height: isExpanded ? contentRef.current?.scrollHeight ?? 0 : 0, overflow: 'hidden', transition: 'height 0.4s ease, opacity 0.4s ease', opacity: isExpanded ? 1 : 0 }}
+                        ref={contentRef}
                     >
                         <div className="mt-3 pt-3 border-t border-border">
                             {education.description && (
@@ -101,7 +102,7 @@ const EducationItem = ({ education }: { education: Education }) => {
                                     </h5>
                                     <ul className="space-y-1">
                                         {education.achievements.map((achievement, index) => (
-                                            <li 
+                                            <li
                                                 key={index}
                                                 className={`${experienceTypography.description} flex items-start`}
                                             >

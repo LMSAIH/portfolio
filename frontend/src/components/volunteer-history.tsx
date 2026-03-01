@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { experienceTypography } from "./Typographies"
 
 type VolunteerExperience = {
@@ -44,6 +44,7 @@ const volunteerExperiences: VolunteerExperience[] = [
 
 const VolunteerExperienceItem = ({ experience }: { experience: VolunteerExperience }) => {
     const [isExpanded, setIsExpanded] = useState(false)
+    const contentRef = useRef<HTMLDivElement>(null)
 
     const toggleExpanded = () => {
         setIsExpanded(!isExpanded)
@@ -82,13 +83,14 @@ const VolunteerExperienceItem = ({ experience }: { experience: VolunteerExperien
                     </div>
 
                     <div
-                        className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                            }`}
+                        style={{ height: isExpanded ? contentRef.current?.scrollHeight ?? 0 : 0, overflow: 'hidden', transition: 'height 0.4s ease, opacity 0.4s ease', opacity: isExpanded ? 1 : 0 }}
                     >
-                        <div className="mt-3 pt-3 border-t border-border">
-                            <p className={`${experienceTypography.description} whitespace-pre-wrap`}>
-                                {experience.description}
-                            </p>
+                        <div ref={contentRef}>
+                            <div className="pt-3 border-t border-border">
+                                <p className={`${experienceTypography.description} whitespace-pre-wrap`}>
+                                    {experience.description}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
