@@ -124,7 +124,7 @@ const Home: React.FC = () => {
                 <Subheader>About</Subheader>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                     <p>
-                        I'm a <span className="text-foreground font-bold">full-stack developer</span> based in Vancouver who builds software for fun (check my commit history). I've led <span className="text-foreground font-bold">winning teams</span> at major hackathons, including <a href="https://devpost.com/software/mapd-urban-development-intelligence" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">StormHacks 2025 — Western Canada's largest</a>.
+                        I'm a <span className="text-foreground font-bold">full-stack developer</span> based in Vancouver who builds software for fun. I've led <span className="text-foreground font-bold">winning teams</span> at major hackathons, including <a href="https://devpost.com/software/mapd-urban-development-intelligence" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">StormHacks 2025 — Western Canada's largest</a>.
                     </p>
                     <p>
                         Currently building @<a href="https://icepanel.io" target="_blank" rel="noopener noreferrer" className="text-foreground font-bold hover:opacity-60 transition-opacity duration-300">IcePanel YC (S23)</a>, a platform that helps software architects design and document software systems. 
