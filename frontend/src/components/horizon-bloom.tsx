@@ -89,7 +89,7 @@ void main() {
     // Pick the planet radius so the limb always drops about the same amount
     // at the screen edges, whatever the aspect ratio
     float drop = 0.12;
-    float R = max((halfW * halfW + drop * drop) / (2.0 * drop), 1.2);
+    float R = max((halfW * halfW + drop * drop) / (2.0 * drop), 5.0);
     vec2 c = vec2(0.0, 0.52 - R);
     vec2 q = p - c;
     float d = length(q) - R;           // altitude above the limb
