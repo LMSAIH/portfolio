@@ -1,94 +1,71 @@
-import { lazy, Suspense } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Skeleton } from "@/components/ui/skeleton";
-import GitHubCalendar from 'react-github-calendar';
-
-// Lazy-loaded components (loaded when needed)
-const Deployments = lazy(() => import("@/components/deployments").then(mod => ({ default: mod.Deployments })));
-const FeaturedProjects = lazy(() => import("@/components/featured-projects").then(mod => ({ default: mod.FeaturedProjects })));
-const GitHubCommits = lazy(() => import("@/components/github-commits").then(mod => ({ default: mod.GitHubCommits })));
-const WorkHistory = lazy(() => import("@/components/work-history").then(mod => ({ default: mod.WorkHistory })));
-const VolunteerHistory = lazy(() => import("@/components/volunteer-history").then(mod => ({ default: mod.VolunteerHistory })));
-const Hackathons = lazy(() => import("@/components/hackathons").then(mod => ({ default: mod.Hackathons })));
-const TechStack = lazy(() => import("@/components/tech-stack").then(mod => ({ default: mod.TechStack })));
-const Education = lazy(() => import("@/components/education").then(mod => ({ default: mod.Education })));
+import YCLogo from '@/assets/y_combinator_logo.svg'
+import LangaraLogo from '@/assets/langara_college_coa.png'
+import UNACLogo from '@/assets/UNAC_logo.png'
+import { WritingSection } from '@/components/writing-section'
+import { FaGithub } from 'react-icons/fa6'
+import { IoLogoLinkedin } from "react-icons/io5";
+import { ThemeToggle } from '@/components/theme-toggle'
+import { HorizonBloom } from '@/components/horizon-bloom'
 
 const Home: React.FC = () => {
     return (
-        <div className="py-24 lg:py-32 px-4 mx-auto max-w-7xl">
-            <Tabs defaultValue="portfolio" className="w-full">
+        <main className="flex min-h-screen flex-col overflow-x-hidden">
+            <div className="mx-auto flex w-full max-w-xl flex-col">
 
-                <div className="mb-10 flex justify-center lg:justify-start">
-                    <TabsList className="inline-flex h-9 items-center justify-center lg:justify-left rounded-lg  text-muted-foreground flex-wrap gap-y-2">
-                        <TabsTrigger value="portfolio" className="px-3 lg:px-4 py-1.5 text-sm">Portfolio</TabsTrigger>
-                        <TabsTrigger value="projects" className="px-3 lg:px-4 py-1.5 text-sm">Projects</TabsTrigger>
-                        <TabsTrigger value="contributions" className="px-3 lg:px-4 py-1.5 text-sm">Contributions</TabsTrigger>
-                    </TabsList>
+                {/* Header */}
+                <div className="flex items-center justify-between px-8 pt-6 pb-4">
+                    <h1 className="font-['Newsreader',Georgia,serif] text-3xl leading-[1.15] font-normal tracking-[-0.01em] sm:text-4xl">Axel Velasquez</h1>
+                    <ThemeToggle />
                 </div>
 
-                <TabsContent value="portfolio" className="space-y-8">
-                    <div className="text-left w-full lg:w-1/2">
-                        <h1 className="mb-4">
-                            I am <span className="font-medium">Axel Velasquez</span>, a fullstack developer who loves building, testing and shipping applications.
-                        </h1>
 
-                        <p className="mb-4">
-                            I enjoy working with non-profits and regularly contribute to open source projects. Helping to shape a better world within your field is not only rewarding, it's human.
-                        </p>
+                {/* About */}
+                <div className="px-8 py-5 text-muted-foreground leading-relaxed">
+                    <p>
+                        I build software that architects love at{" "}
+                        <a className="underline decoration-dashed decoration-2 decoration-orange-400 underline-offset-4 font-medium transition-colors hover:text-foreground" href="https://icepanel.io/" target='_blank'>IcePanel (YC W23)</a>{" "}
+                        <img src={YCLogo} alt="Y Combinator logo" width={16} height={16} className="inline align-middle rounded-xs mb-0.5 ml-1" />
+                    </p>
+                    <p>
+                        research at{" "}
+                        <a className="underline underline-offset-4 decoration-dashed decoration-2 decoration-green-600 font-medium transition-colors hover:text-foreground" href="https://langara.ca/" target='_blank'>Langara</a>{" "}
+                        <img src={LangaraLogo} alt="Langara College logo" width={20} height={18} className="inline align-middle rounded-xs mb-0.5 ml-1" />
+                    </p>
+                    <p>
+                        and serve on the Board of Directors for the{" "}
+                        <a className="underline underline-offset-4 decoration-dashed decoration-2 decoration-sky-500 font-medium transition-colors hover:text-foreground" href="https://unacvancouver.org/" target='_blank'>United Nations Association in Canada, Vancouver</a>{" "}
+                        <img src={UNACLogo} alt="UNAC Logo" width={20} height={12} className="inline align-middle rounded-xs mb-0.5 ml-1" />
+                    </p>
 
-                        <p className="mb-4">
-                            If you are interested in any of my work, almost everything is publicly available on my <a href="https://github.com/LMSAIH" target="_blank" rel="noopener noreferrer" className="font-medium underline">GitHub</a>. If it isn't but you'd like to inquire about it, feel free to reach out to me via email.
-                        </p>
-                    </div>
+                    <p className="mt-4"> Beyond work, I enjoy volunteering, attending hackatons, reading, swimming, running, or doing anything that makes me feel alive. </p>
 
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <Deployments />
-                    </Suspense>
+                    <p className="mt-4"> Programming is an <span className="italic text-foreground">act of creation</span>. Through my work I strive to build something meaningful. </p>
+                </div>
 
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
-                        <Education />
-                    </Suspense>
+                {/* Links */}
+                <div className="flex items-center gap-4 px-8 py-2">
+                    <a href="https://github.com/LMSAIH" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-foreground transition-opacity hover:opacity-70">
+                        <FaGithub className="size-6" />
+                    </a>
+                    <a href="https://www.linkedin.com/in/axel-gael-velasquez-castaneda-1a4075323/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-[#0A66C2] transition-opacity hover:opacity-70">
+                        <IoLogoLinkedin className="size-6" />
+                    </a>
+                    <a href="mailto:axel.velascast@gmail.com" className="ml-auto self-end text-sm text-muted-foreground underline decoration-dashed decoration-2 underline-offset-4 transition-colors hover:text-foreground">
+                        axel.velascast@gmail.com
+                    </a>
+                </div>
 
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <WorkHistory />
-                    </Suspense>
+                {/* Writing */}
+                <div className="px-8 py-5">
+                    <WritingSection />
+                </div>
+            </div>
 
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <VolunteerHistory />
-                    </Suspense>
-
-                    <h3 className="text-lg font-semibold">Tech Stack</h3>
-
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
-                        <TechStack />
-                    </Suspense>
-
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-48 w-full" /></div>}>
-                        <Hackathons />
-                    </Suspense>
-
-                    <h3 className="text-lg font-semibold">Github Contribution Graph</h3>
-
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-32 w-full" /></div>}>
-                        <GitHubCalendar username="LMSAIH" />
-                    </Suspense>
-
-                </TabsContent>
-
-                <TabsContent value="projects" className="space-y-8">
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <FeaturedProjects />
-                    </Suspense>
-                </TabsContent>
-
-                <TabsContent value="contributions" className="space-y-8">
-                    <Suspense fallback={<div className="p-4 border rounded-lg"><Skeleton className="h-64 w-full" /></div>}>
-                        <GitHubCommits />
-                    </Suspense>
-                </TabsContent>
-
-            </Tabs>
-        </div>
+            {/* Horizon, tucked up under the writing list and filling whatever is left of the screen */}
+            <HorizonBloom className="-mt-40 min-h-[30rem] flex-1">
+                <p className="px-8 py-5 text-center text-sm text-muted-foreground"> &copy; Axel Velasquez 2026, All rights reserved.</p>
+            </HorizonBloom>
+        </main>
     );
 }
 
